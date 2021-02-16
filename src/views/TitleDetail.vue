@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row class="caption">
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-data-iterator
           :items="items"
           :items-per-page.sync="itemsPerPage"
@@ -11,6 +11,13 @@
             <v-row>
               <v-col v-for="item in props.items" :key="item.name">
                 <v-card>
+                  <v-card-title
+                    class="subheading font-weight-bold blue-grey darken-1 white--text"
+                  >
+                    Grade and Size
+                  </v-card-title>
+
+                  <v-divider></v-divider>
                   <v-list dense>
                     <v-list-item>
                       <v-list-item-content>Date:</v-list-item-content>
@@ -78,7 +85,7 @@
           </template>
         </v-data-iterator></v-col
       >
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-data-iterator
           :items="items"
           :items-per-page.sync="itemsPerPage"
@@ -88,6 +95,13 @@
             <v-row>
               <v-col v-for="item in props.items" :key="item.name">
                 <v-card>
+                  <v-card-title
+                    class="subheading font-weight-bold blue-grey darken-1 white--text"
+                  >
+                    Weight
+                  </v-card-title>
+
+                  <v-divider></v-divider>
                   <v-list dense>
                     <v-list-item>
                       <v-list-item-content>BL weight : </v-list-item-content>

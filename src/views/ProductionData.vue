@@ -10,6 +10,13 @@
         <v-row>
           <v-col v-for="item in props.items" :key="item.name">
             <v-card>
+              <v-card-title
+                class="subheading font-weight-bold blue-grey darken-1 white--text"
+              >
+                Production Data
+              </v-card-title>
+
+              <v-divider></v-divider>
               <v-list dense>
                 <v-list-item>
                   <v-list-item-content>Production time:</v-list-item-content>

@@ -1,19 +1,21 @@
 <template>
-  <div class="scrollcell">
-    <ve-table
-      :scroll-width="1600"
-      fixed-header
-      border-x
-      border-y
-      :columns="columns"
-      :table-data="data_table1"
-      :footer-data="footerData"
-      rowKeyFieldName="rowkey"
-      :cell-selection-option="cellSelectionOption"
-      :cell-style-option="cellStyleOption"
-      :cell-span-option="cellSpanOption"
-      class="ma-2 caption"
-    />
+  <div id="box">
+    <div class="item">
+      <ve-table
+        class="ma-2 caption item box"
+        border-x
+        border-y
+        fixed-header
+        rowKeyFieldName="rowkey"
+        :columns="columns"
+        :table-data="data_table1"
+        :footer-data="footerData"
+        :cell-selection-option="cellSelectionOption"
+        :cell-style-option="cellStyleOption"
+        :cell-span-option="cellSpanOption"
+        :scroll-width="1870"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -40,9 +42,9 @@ export default {
         //ตั่งค่าพื้นหลัง body column
         bodyCellClass: ({ column /* , rowIndex */ }) => {
           if (
-            column.field === "_b_std" ||
-            column.field === "_pyield_std" ||
-            column.field === "_q_std"
+            column.field === "_b_std1" ||
+            column.field === "_pyield_std1" ||
+            column.field === "_q_std1"
           ) {
             return "table-body-cell-class1";
           }
@@ -50,9 +52,9 @@ export default {
         //ตั่งค่าพื้นหลัง footer column
         footerCellClass: ({ column, rowIndex }) => {
           if (
-            column.field === "_b_grade" ||
-            column.field === "_p_grade" ||
-            column.field === "_m_cobble_kg"
+            column.field === "_b_grade1" ||
+            column.field === "_p_grade1" ||
+            column.field === "_m_cobble_kg1"
           ) {
             return "table-footer-cell-class1";
           }
@@ -510,6 +512,15 @@ export default {
             rowspan: 1,
             colspan: 2
           };
+        } else if (
+          column.field === "_e_stove" ||
+          column.field === "_e_elec" ||
+          column.field === "_e_diesel"
+        ) {
+          return {
+            rowspan: 0,
+            colspan: 0
+          };
         }
       }
       if (rowIndex === 1) {
@@ -522,6 +533,15 @@ export default {
           return {
             rowspan: 1,
             colspan: 2
+          };
+        } else if (
+          column.field === "_e_stove" ||
+          column.field === "_e_elec" ||
+          column.field === "_e_diesel"
+        ) {
+          return {
+            rowspan: 0,
+            colspan: 0
           };
         }
       }

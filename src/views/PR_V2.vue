@@ -1,13 +1,18 @@
 <template>
-  <div class="home">
-    <v-col cols="8" class="">
-      <v-card class="grey lighten-3">
-        <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
-          <v-toolbar-title>รายงานการผลิต โรง...ประจำวันที่ ...</v-toolbar-title>
-        </v-toolbar>
-        <TitleDetail />
-      </v-card>
-    </v-col>
+  <div class="pr_v2">
+    <v-card class="grey lighten-3 ma-4">
+      <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
+        <v-toolbar-title>รายงานการผลิต โรง...ประจำวันที่ ...</v-toolbar-title>
+      </v-toolbar>
+      <v-row class="mb-2">
+        <v-col cols="12" sm="8" class="pa-0">
+          <TitleDetail />
+        </v-col>
+        <v-col cols="12" sm="4" class="pa-0">
+          <ProductionData />
+        </v-col>
+      </v-row>
+    </v-card>
     <v-card class="grey lighten-3 ma-4">
       <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
         <v-toolbar-title>Production Report Test</v-toolbar-title>
@@ -26,20 +31,12 @@
       </v-toolbar>
       <Consumption />
     </v-card>
-    <v-card class="grey lighten-3 ma-4">
+    <v-card class="grey lighten-3 ma-4 mb-8">
       <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
         <v-toolbar-title>Loss Report</v-toolbar-title>
       </v-toolbar>
       <LossReport />
     </v-card>
-    <v-col cols="5" class="">
-      <v-card class="grey lighten-3 mb-2">
-        <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
-          <v-toolbar-title>Production Data</v-toolbar-title>
-        </v-toolbar>
-        <ProductionData />
-      </v-card>
-    </v-col>
   </div>
 </template>
 
@@ -52,7 +49,7 @@ import LossReport from "./LossReport";
 import ProductionData from "./ProductionData";
 
 export default {
-  name: "Home",
+  name: "PR_V2",
   components: {
     TitleDetail,
     ProductionReport,

@@ -1,19 +1,21 @@
 <template>
-  <div class="about">
-    <ve-table
-      :scroll-width="1800"
-      fixed-header
-      border-x
-      border-y
-      :columns="columns"
-      :table-data="data_table1"
-      :footer-data="footerData"
-      rowKeyFieldName="rowkey"
-      :cell-selection-option="cellSelectionOption"
-      :cell-style-option="cellStyleOption"
-      :cell-span-option="cellSpanOption"
-      class="ma-2 caption"
-    />
+  <div id="box2">
+    <div class="item1">
+      <ve-table
+        class="ma-2 caption"
+        rowKeyFieldName="rowkey"
+        fixed-header
+        border-x
+        border-y
+        :scroll-width="1870"
+        :columns="columns"
+        :table-data="data_table1"
+        :footer-data="footerData"
+        :cell-selection-option="cellSelectionOption"
+        :cell-style-option="cellStyleOption"
+        :cell-span-option="cellSpanOption"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -95,7 +97,7 @@ export default {
               title: "(นาที)",
               width: "57%"
             }
-          ],
+          ]
         },
         //PP
         { field: "_PP", key: "c", title: "PP", width: "43%" },

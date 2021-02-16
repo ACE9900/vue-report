@@ -9,7 +9,6 @@
       :table-data="data_table1"
       rowKeyFieldName="rowkey"
       :cell-selection-option="cellSelectionOption"
-      :cell-style-option="cellStyleOption"
       :cell-span-option="cellSpanOption"
       class="ma-2 caption"
     />
@@ -203,7 +202,7 @@ export default {
           };
         }
       }
-    },
+    }
   },
   created() {
     //this.initTableData();

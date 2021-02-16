@@ -10,7 +10,6 @@
       rowKeyFieldName="rowkey"
       :cell-selection-option="cellSelectionOption"
       :cell-style-option="cellStyleOption"
-      :cell-span-option="cellSpanOption"
       class="ma-2 caption"
     />
   </div>
@@ -83,10 +82,6 @@ export default {
           }
         }
       },
-      //ตั่งค่า footer โดยเรียกใช้ function
-      cellSpanOption: {
-        footerCellSpan: this.footerCellSpan
-      },
       //ตั่งค่า selected click
       cellSelectionOption: {
         enable: false
@@ -132,36 +127,7 @@ export default {
         });
       }
       this.data_table1 = data;
-    },
-    // footer cell span
-    footerCellSpan({ column, rowIndex }) {
-      if (rowIndex === 0) {
-        if (column.field === "_no") {
-          return {
-            rowspan: 1,
-            colspan: 3
-          };
-        } else if (column.field === "_b_std") {
-          return {
-            rowspan: 1,
-            colspan: 2
-          };
-        }
-      }
-      if (rowIndex === 1) {
-        if (column.field === "_no") {
-          return {
-            rowspan: 1,
-            colspan: 3
-          };
-        } else if (column.field === "_b_std") {
-          return {
-            rowspan: 1,
-            colspan: 2
-          };
-        }
-      }
-    },
+    }
   },
   created() {
     //this.initTableData();

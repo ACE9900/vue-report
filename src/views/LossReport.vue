@@ -25,44 +25,49 @@ export default {
       //Data Table
       data_table1: [
         {
-          //CV1
-          _cv1: "a",
-          //CV2
-          _cv2: "b",
-          //Cold Shear
-          _coldshear: "c",
-          //SAW
-          _saw: "d",
-          //Scale
-          _scale: "e",
-          //หางเหล็ก
-          _irontail: "f",
-          //BandSAW
-          _band_saw: "g",
-          //Cobble
-          _cobble: "h",
-          //Total
-          _total: "i"
+          _cv1: 1, //CV1
+          _cv2: 2, //CV2
+          _coldshear: 3, //Cold Shear
+          _scale: 4, //Scale
+          _irontail: 5, //หางเหล็ก
+          _reject: 6, //BandSAW
+          _cobble: 7, //Cobble
+          _total: 8, //Total
+          _unit: "กก." //Unit
         },
         {
-          //CV1
-          _cv1: "a",
-          //CV2
-          _cv2: "b",
-          //Cold Shear
-          _coldshear: "c",
-          //SAW
-          _saw: "d",
-          //Scale
-          _scale: "e",
-          //หางเหล็ก
-          _irontail: "f",
-          //BandSAW
-          _band_saw: "g",
-          //Cobble
-          _cobble: "h",
-          //Total
-          _total: "i"
+          //Percent
+          _cv1: ((1 / localStorage.getItem("localQuantity_act")) * 100).toFixed(
+            2
+          ), //CV1
+          _cv2: ((2 / localStorage.getItem("localQuantity_act")) * 100).toFixed(
+            2
+          ), //CV2
+          _coldshear: (
+            (3 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //Cold Shear
+          _scale: (
+            (4 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //Scale
+          _irontail: (
+            (5 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //หางเหล็ก
+          _reject: (
+            (6 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //BandSAW
+          _cobble: (
+            (7 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //Cobble
+          _total: (
+            (8 / localStorage.getItem("localQuantity_act")) *
+            100
+          ).toFixed(2), //Total
+          _unit: "%" //Unit
         }
       ],
       //ตั่งค่า style table
@@ -94,18 +99,16 @@ export default {
         { field: "_cv2", key: "b", title: "CV2", width: "50%" },
         //Cold Shear
         { field: "_coldshear", key: "c", title: "Cold Shear", width: "50%" },
-        //SAW
-        { field: "_saw", key: "d", title: "SAW", width: "50%" },
         //Scale
         { field: "_scale", key: "e", title: "Scale", width: "50%" },
         //หางเหล็ก
         { field: "_irontail", key: "f", title: "หางเหล็ก", width: "50%" },
         //BandSAW
-        { field: "_band_saw", key: "g", title: "BandSAW", width: "40%" },
+        { field: "_reject", key: "g", title: "Reject", width: "40%" },
         //Cobble
-        { field: "_cobble", key: "h", title: "Cobble", width: "40%" },
+        { field: "_total", key: "h", title: "Total", width: "40%" },
         //Total
-        { field: "_total", key: "i", title: "Total", width: "40%" }
+        { field: "_unit", key: "i", title: "", width: "40%" }
       ],
       tableData: []
     };

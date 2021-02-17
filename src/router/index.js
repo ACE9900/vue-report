@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import PR_V2 from "../views/PR_V2.vue";
+import PRV2 from "../views/PRV2.vue";
 
 Vue.use(VueRouter);
 
@@ -9,13 +9,13 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
-    path: "/PR_V2",
-    name: "PR_V2",
-    component: PR_V2,
-  },
+    path: "/PRV2",
+    name: "PRV2",
+    component: PRV2
+  }
 ];
 
 const router = new VueRouter({

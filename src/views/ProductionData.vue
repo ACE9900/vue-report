@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
     <v-data-iterator
+      v-if="productData"
       :items="items"
       :items-per-page.sync="itemsPerPage"
       hide-default-footer
@@ -40,7 +41,7 @@
                     {{ item.down_time }} (min)
                   </v-list-item-content>
                   <v-list-item-content class="align-end blue--text"
-                    >18.6 (%)</v-list-item-content
+                    >{{ percent_Downtime }} (%)</v-list-item-content
                   >
                 </v-list-item>
 
@@ -50,7 +51,7 @@
                     {{ item.net_roll }} (min)
                   </v-list-item-content>
                   <v-list-item-content class="align-end blue--text"
-                    >81.4 (%)</v-list-item-content
+                    >{{ percent_Netroll }} (%)</v-list-item-content
                   >
                 </v-list-item>
 
@@ -98,20 +99,71 @@
 
 <script>
 export default {
+  name: "ProductionData",
   data: () => ({
     itemsPerPage: 4,
     items: [
       {
         pro_time: 11,
-        ava_time: 660,
-        down_time: 123,
-        net_roll: 537,
-        mill_ava: 18.64,
-        roll_speed: 48.64,
-        pro_machine: 45.36,
-        run_factor: 81.4
+        ava_time: localStorage.getItem("localPro") * 60,
+        down_time: localStorage.getItem("localTotaltime"),
+        net_roll:
+          localStorage.getItem("localAva") -
+          localStorage.getItem("localTotaltime"),
+        mill_ava: (
+          (localStorage.getItem("localTotaltime") /
+            localStorage.getItem("localAva")) *
+          100
+        ).toFixed(2),
+        roll_speed: (
+          localStorage.getItem("localBillet_act") /
+          1000 /
+          11
+        ).toFixed(2),
+        pro_machine: (
+          localStorage.getItem("localQuantity_act") /
+          1000 /
+          11
+        ).toFixed(2),
+        run_factor: (
+          100 *
+          (localStorage.getItem("localTotaltime") /
+            localStorage.getItem("localAva"))
+        ).toFixed(1)
       }
     ]
-  })
+  }),
+  computed: {
+    productData() {
+      if (
+        localStorage.getItem("localPro") != null ||
+        localStorage.getItem("localPro") != "" ||
+        localStorage.getItem("localAva") != null ||
+        localStorage.getItem("localAva") != ""
+      ) {
+        this.$store.commit("setPro", this.items[0].pro_time);
+        this.$store.commit("setAva", this.items[0].ava_time);
+        //console.log("state :" + localStorage.getItem("localPro"));
+      }
+      return true;
+    },
+    percent_Downtime() {
+      return (
+        100 *
+        (localStorage.getItem("localTotaltime") /
+          localStorage.getItem("localAva"))
+      ).toFixed(1);
+    },
+    percent_Netroll() {
+      return ((this.items[0].net_roll / this.items[0].ava_time) * 100).toFixed(
+        1
+      );
+    }
+  },
+  created() {
+    /* this.$store.commit("setPro", this.items[0].pro_time);
+    this.$store.commit("setAva", this.items[0].ava_time);
+    console.log(this.items[0].pro_time) */
+  }
 };
 </script>

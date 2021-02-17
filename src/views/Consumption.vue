@@ -9,6 +9,7 @@
       :table-data="data_table1"
       rowKeyFieldName="rowkey"
       :cell-selection-option="cellSelectionOption"
+      :cell-style-option="cellStyleOption"
       :cell-span-option="cellSpanOption"
       class="ma-2 caption"
     />
@@ -25,65 +26,62 @@ export default {
       //Data Table
       data_table1: [
         {
-          //None
-          _until: "ดีเซล(Lirte)",
-          //ก่อนจุดเตา
-          _be_burn: "0",
-          //ก่อนรีด
-          _be_iron: "0",
-          //หลังรีด
-          _af_burn: "0",
-          //ใช้จุดเตา
-          _use_burn: "0",
-          //ใช้รีด
-          _use_iron: "0",
-          //รวม
-          _total: "0",
+          _until: "ดีเซล(Lirte)", //None
+          _be_burn: 0, //ก่อนจุดเตา
+          _be_iron: 0, //ก่อนรีด
+          _af_burn: 0, //หลังรีด
+          _use_burn: 3000, //ใช้จุดเตา
+          _use_iron: 20500, //ใช้รีด
+          _total: 3000 + 20500, //รวม
           //อัตราการใช้พลังงาน
-          _p_rolling: "0.0",
-          _p_total: "0.0",
+          _p_rolling: (
+            (20500 / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Rolling
+          _p_total: (
+            ((3000 + 20500) / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Total
           //หน่วย
           _unit: "ลิตร/ตัน"
         },
         {
-          //None
-          _until: "น้ำมันเตา(Lirte)",
-          //ก่อนจุดเตา
-          _be_burn: "0",
-          //ก่อนรีด
-          _be_iron: "0",
-          //หลังรีด
-          _af_burn: "0",
-          //ใช้จุดเตา
-          _use_burn: "3,000",
-          //ใช้รีด
-          _use_iron: "20,500",
-          //รวม
-          _total: "23,500",
+          _until: "น้ำมันเตา(Lirte)", //None
+          _be_burn: 0, //ก่อนจุดเตา
+          _be_iron: 0, //ก่อนรีด
+          _af_burn: 0, //หลังรีด
+          _use_burn: 3000, //ใช้จุดเตา
+          _use_iron: 20500, //ใช้รีด
+          _total: 3000 + 20500, //รวม
           //อัตราการใช้พลังงาน
-          _p_rolling: "41.09",
-          _p_total: "47.10",
-          //หน่วย
-          _unit: "ลิตร/ตัน"
+          _p_rolling: (
+            (20500 / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Rolling
+          _p_total: (
+            ((3000 + 20500) / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Total
+          _unit: "ลิตร/ตัน" //หน่วย
         },
         {
           //None
-          _until: "ไฟฟ้า(kwh)",
-          //ก่อนจุดเตา
-          _be_burn: "617,755",
-          //ก่อนรีด
-          _be_iron: "",
-          //หลังรีด
-          _af_burn: "635,655",
-          //ใช้จุดเตา
-          _use_burn: "",
-          //ใช้รีด
-          _use_iron: "44,900",
-          //รวม
-          _total: "44,900",
+          _until: "ไฟฟ้า(kwh)", //None
+          _be_burn: 0, //ก่อนจุดเตา
+          _be_iron: 0, //ก่อนรีด
+          _af_burn: 0, //หลังรีด
+          _use_burn: 3000, //ใช้จุดเตา
+          _use_iron: 20500, //ใช้รีด
+          _total: 3000 + 20500, //รวม
           //อัตราการใช้พลังงาน
-          _p_rolling: "90.00",
-          _p_total: "90.00",
+          _p_rolling: (
+            (20500 / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Rolling
+          _p_total: (
+            ((3000 + 20500) / localStorage.getItem("localQuantity_act")) *
+            1000
+          ).toFixed(2), //Total
           //หน่วย
           _unit: "kwh/ตัน"
         }
@@ -105,7 +103,7 @@ export default {
             column.field === "_p_total" ||
             column.field === "_unit"
           ) {
-            return "table-header-cell-consumption";
+            return "table-body-cell-consumption";
           }
         }
       },
@@ -121,17 +119,17 @@ export default {
       columns: [
         { field: "_until", key: "a", title: "", width: "75%" },
         //ก่อนจุดเตา
-        { field: "_be_burn", key: "b", title: "ก่อนจุดเตา A", width: "50%" },
+        { field: "_be_burn", key: "b", title: "ก่อนจุดเตา", width: "50%" },
         //ก่อนรีด
-        { field: "_be_iron", key: "c", title: "ก่อนรีด B", width: "50%" },
+        { field: "_be_iron", key: "c", title: "ก่อนรีด", width: "50%" },
         //หลังรีด
-        { field: "_af_burn", key: "d", title: "หลังรีด C", width: "50%" },
+        { field: "_af_burn", key: "d", title: "หลังรีด", width: "50%" },
         //ใช้จุดเตา
-        { field: "_use_burn", key: "e", title: "ใช้จุดเตา D", width: "50%" },
+        { field: "_use_burn", key: "e", title: "ใช้จุดเตา", width: "50%" },
         //ใช้รีด
-        { field: "_use_iron", key: "f", title: "ใช้รีด E", width: "50%" },
+        { field: "_use_iron", key: "f", title: "ใช้รีด", width: "50%" },
         //รวม
-        { field: "_total", key: "g", title: "รวม F", width: "80%" },
+        { field: "_total", key: "g", title: "รวม", width: "80%" },
         //อัตราการใช้พลังงาน
         {
           title: "อัตราการใช้พลังงาน",

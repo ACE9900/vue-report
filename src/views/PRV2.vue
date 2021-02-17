@@ -15,13 +15,21 @@
     </v-card>
     <v-card class="grey lighten-3 ma-4">
       <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
-        <v-toolbar-title>Production Report Test</v-toolbar-title>
+        <v-row class="mx-1">
+          <v-toolbar-title>Production Report Test</v-toolbar-title
+          ><v-spacer></v-spacer><Test
+        /></v-row>
+      </v-toolbar>
+    </v-card>
+    <v-card class="grey lighten-3 ma-4">
+      <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
+        <v-toolbar-title>Production Report</v-toolbar-title>
       </v-toolbar>
       <ProductionReport />
     </v-card>
     <v-card class="grey lighten-3 ma-4">
       <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
-        <v-toolbar-title>Delay Report Test</v-toolbar-title>
+        <v-toolbar-title>Delay Report</v-toolbar-title>
       </v-toolbar>
       <DelayReport />
     </v-card>
@@ -47,16 +55,18 @@ import DelayReport from "./DelayReport";
 import Consumption from "./Consumption";
 import LossReport from "./LossReport";
 import ProductionData from "./ProductionData";
+import Test from "./Test";
 
 export default {
-  name: "PR_V2",
+  name: "PRV2",
   components: {
     TitleDetail,
     ProductionReport,
     DelayReport,
     Consumption,
     LossReport,
-    ProductionData
+    ProductionData,
+    Test
   },
   data() {
     return {

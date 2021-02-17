@@ -1,21 +1,20 @@
 <template>
-  <div id="box">
-    <div class="item">
-      <ve-table
-        class="ma-2 caption item box"
-        border-x
-        border-y
-        fixed-header
-        rowKeyFieldName="rowkey"
-        :columns="columns"
-        :table-data="data_table1"
-        :footer-data="footerData"
-        :cell-selection-option="cellSelectionOption"
-        :cell-style-option="cellStyleOption"
-        :cell-span-option="cellSpanOption"
-        :scroll-width="1870"
-      />
-    </div>
+  <div>
+    <ve-table
+      v-if="productReport"
+      class="ma-2 caption item box"
+      border-x
+      border-y
+      fixed-header
+      rowKeyFieldName="rowkey"
+      :columns="columns"
+      :table-data="data_table1"
+      :footer-data="footerData"
+      :cell-selection-option="cellSelectionOption"
+      :cell-style-option="cellStyleOption"
+      :cell-span-option="cellSpanOption"
+      :scroll-width="1870"
+    />
   </div>
 </template>
 <script>
@@ -116,7 +115,7 @@ export default {
                     {
                       field: "_b_std",
                       key: "e",
-                      title: "กก.",
+                      title: "(ton)",
                       width: "25%"
                     }
                   ]
@@ -127,7 +126,7 @@ export default {
                     {
                       field: "_b_act",
                       key: "f",
-                      title: "กก.",
+                      title: "(ton)",
                       width: "25%"
                     }
                   ]
@@ -182,7 +181,7 @@ export default {
                     {
                       field: "_q_bundle",
                       key: "i",
-                      title: "แท่ง",
+                      title: "(มัด/ขด)",
                       width: "34%"
                     }
                   ]
@@ -193,7 +192,7 @@ export default {
                     {
                       field: "_q_pcs",
                       key: "j",
-                      title: "แท่ง",
+                      title: "เส้น",
                       width: "22%"
                     }
                   ]
@@ -204,7 +203,7 @@ export default {
                     {
                       field: "_q_std",
                       key: "k",
-                      title: "กก.",
+                      title: "(ton)",
                       width: "27%"
                     }
                   ]
@@ -215,7 +214,7 @@ export default {
                     {
                       field: "_q_act",
                       key: "l",
-                      title: "กก.",
+                      title: "(ton)",
                       width: "32%"
                     }
                   ]
@@ -293,7 +292,7 @@ export default {
                     {
                       field: "_ploss_kg",
                       key: "z",
-                      title: "กก.",
+                      title: "(kg)",
                       width: "33%"
                     }
                   ]
@@ -304,7 +303,7 @@ export default {
         },
         //Product Yield
         {
-          title: "Product Yield",
+          title: "Product Yield (%)",
           children: [
             {
               title: "",
@@ -385,100 +384,128 @@ export default {
         {
           _no: "1",
           //Billet
-          _b_heat: "6400211",
+          _b_heat: 6400211,
           _b_grade: "SR24",
-          _b_qty: "4",
-          _b_std: "",
-          _b_act: "8461",
+          _b_qty: 4,
+          _b_std: 0,
+          _b_act: 8461,
           //Product
           _p_size: "AG 40x40x6",
           _p_grade: "SS400",
           //Quantity
-          _q_bundle: "4",
-          _q_pcs: "403",
-          _q_std: "",
-          _q_act: "8195",
+          _q_bundle: 4,
+          _q_pcs: 403,
+          _q_std: 0,
+          _q_act: 8195,
           //Miss roll Total
-          _m_cobble_piece: "",
-          _m_cobble_kg: "",
-          _m_return_piece: "",
-          _m_return_kg: "",
-          _m_total: "0.00",
+          _m_cobble_piece: 0,
+          _m_cobble_kg: 0,
+          _m_return_piece: 0,
+          _m_return_kg: 0,
+          _m_total: 0.0,
           //Production Loss(kgs)
-          _ploss_kg: "266",
+          _ploss_kg: 266,
           //Product Yield(%)
-          _pyield_std: "",
-          _pyield_act: "96.86",
+          _pyield_std: 0,
+          _pyield_act: 96.86,
           //Energy Consumption
-          _e_stove: "375",
-          _e_elec: "716",
-          _e_diesel: "0"
+          _e_stove: 375,
+          _e_elec: 716,
+          _e_diesel: 0
         },
         {
           _no: "1",
           //Billet
-          _b_heat: "6400212",
+          _b_heat: 6400212,
           _b_grade: "SR24",
-          _b_qty: "23",
-          _b_std: "",
-          _b_act: "49078",
+          _b_qty: 23,
+          _b_std: 0,
+          _b_act: 49078,
           //Product
           _p_size: "AG 40x40x6",
           _p_grade: "SS400",
           //Quantity
-          _q_bundle: "22",
-          _q_pcs: "2244",
-          _q_std: "",
-          _q_act: "45869",
+          _q_bundle: 22,
+          _q_pcs: 2244,
+          _q_std: 0,
+          _q_act: 45869,
           //Miss roll Total
-          _m_cobble_piece: "",
-          _m_cobble_kg: "",
-          _m_return_piece: "",
-          _m_return_kg: "",
-          _m_total: "0.00",
+          _m_cobble_piece: 0,
+          _m_cobble_kg: 0,
+          _m_return_piece: 0,
+          _m_return_kg: 0,
+          _m_total: 0.0,
           //Production Loss(kgs)
-          _ploss_kg: "3209",
+          _ploss_kg: 3209,
           //Product Yield(%)
-          _pyield_std: "",
-          _pyield_act: "93.46",
+          _pyield_std: 0,
+          _pyield_act: 93.46,
           //Energy Consumption
-          _e_stove: "2153",
-          _e_elec: "4114",
-          _e_diesel: "0"
+          _e_stove: 2153,
+          _e_elec: 4114,
+          _e_diesel: 0
         },
         {
           _no: "1",
           //Billet
-          _b_heat: "6400211",
+          _b_heat: 6400211,
           _b_grade: "SR24",
-          _b_qty: "4",
-          _b_std: "",
-          _b_act: "8461",
+          _b_qty: 4,
+          _b_std: 0,
+          _b_act: 8461,
           //Product
           _p_size: "AG 40x40x6",
           _p_grade: "SS400",
           //Quantity
-          _q_bundle: "4",
-          _q_pcs: "403",
-          _q_std: "",
-          _q_act: "8195",
+          _q_bundle: 4,
+          _q_pcs: 403,
+          _q_std: 0,
+          _q_act: 8195,
           //Miss roll Total
-          _m_cobble_piece: "",
-          _m_cobble_kg: "",
-          _m_return_piece: "",
-          _m_return_kg: "",
-          _m_total: "0.00",
+          _m_cobble_piece: 0,
+          _m_cobble_kg: 0,
+          _m_return_piece: 0,
+          _m_return_kg: 0,
+          _m_total: 0.0,
           //Production Loss(kgs)
-          _ploss_kg: "266",
+          _ploss_kg: 266,
           //Product Yield(%)
-          _pyield_std: "",
-          _pyield_act: "96.86",
+          _pyield_std: 0,
+          _pyield_act: 96.86,
           //Energy Consumption
-          _e_stove: "375",
-          _e_elec: "716",
-          _e_diesel: "0"
+          _e_stove: 375,
+          _e_elec: 716,
+          _e_diesel: 0
         }
-      ]
+      ],
+      //Summary Data
+      sum_b_qty: 0, //QTY
+      sum_b_std: 0, //STD
+      sum_b_act: 0, //ACT
+      sum_q_bundle: 0, //Bundle
+      sum_q_pcs: 0, //Pcs
+      sum_q_std: 0, //STD Wgt
+      sum_q_act: 0, //Actual Wgt
+      sum_m_return_piece: 0, //Return Piece
+      sum_m_return_kg: 0, //Return Kg
+      sum_m_cobble_piece: 0, //Cobble Piece
+      sum_m_cobble_kg: 0, //Cobble Kg
+      sum_m_total: 0, //Total
+      sum_ploss_kg: 0, //Production Loss
+      sum_pyield_std: 0, //Production Yield STD
+      sum_pyield_act: 0, //Production Yield ACT
+      sum_e_stove: 0, //Enegy Stove
+      sum_e_elec: 0, //Enegy Elec
+      sum_e_diesel: 0, //Enegy Diesel
+      //Percent Data
+      percent_act: 0, //ACT
+      percent_q_act: 0, //Actual Wgt
+      percent_m_return_kg: 0, //Return Kg
+      percent_m_cobble_kg: 0, //Cobble Kg
+      percent_ploss_kg: 0, //Production Loss
+      percent_e_stove: 0, //Enegy Stove
+      percent_e_elec: 0, //Enegy Elec
+      percent_e_diesel: 0 //Enegy Diesel
     };
   },
   methods: {
@@ -548,46 +575,154 @@ export default {
     },
     // footer data
     initFooterData() {
+      this.summary();
       this.footerData = [
         {
           rowkey: 0,
           _no: "Total",
-          _b_heat: 251,
-          _b_qty: 535020,
-          _b_act: 241,
-          _p_size: 24463,
-          _q_bundle: 498905,
-          _q_pcs: 0.0,
-          _q_std: 0.0,
-          _q_act: 2.0,
-          _m_return_piece: 4281.0,
-          _m_return_kg: 0.8,
-          _m_cobble_piece: 31834,
-          _m_cobble_kg: "",
-          _m_total: 93.25,
-          _ploss_kg: 23500,
-          _pyield_std: 44900,
-          _pyield_act: 0
+          _b_heat: this.sum_b_qty, //QTY
+          _b_grade: this.sum_b_std, //STD
+          _b_qty: this.sum_b_act, //ACT
+          _b_act: this.sum_q_bundle, //Bundle
+          _p_size: this.sum_q_pcs, //Pcs
+          _p_grade: this.sum_q_std, //STD Wgt
+          _q_bundle: this.sum_q_act, //Actual Wgt
+          _q_pcs: this.sum_m_return_piece, //Return Piece
+          _q_std: this.sum_m_return_kg, //Return Kg
+          _q_act: this.sum_m_cobble_piece, //Cobble Piece
+          _m_return_piece: this.sum_m_cobble_kg, //Cobble Kg
+          _m_return_kg: this.sum_m_total, //Total
+          _m_cobble_piece: this.sum_ploss_kg, //Production Loss
+          _m_cobble_kg: this.sum_pyield_std, //Production Yield STD
+          _m_total: this.sum_pyield_act, //Production Yield ACT
+          _ploss_kg: this.sum_e_stove, //Enegy Stove
+          _pyield_std: this.sum_e_elec, //Enegy Elec
+          _pyield_act: this.sum_e_diesel //Enegy Diesel
         },
         {
           rowkey: 1,
-          _b_heat: "",
-          _b_qty: 535.02,
-          _p_size: "",
-          _q_bundle: 498.91,
-          _q_pcs: "",
-          _q_std: 0,
-          _q_act: "",
-          _m_return_piece: 4.28,
-          _m_return_kg: "",
-          _m_cobble_piece: 31.83,
-          _m_cobble_kg: "",
-          _m_total: "",
-          _ploss_kg: 23500,
-          _pyield_std: 44900,
-          _pyield_act: 0
+          _b_qty: this.percent_b_act, //ACT
+          _q_bundle: this.percent_q_act, //Actual Wgt
+          _q_std: this.percent_m_return_kg, //Return Kg
+          _m_return_piece: this.percent_m_cobble_kg, //Cobble Kg
+          _m_cobble_piece: this.percent_ploss_kg, //Production Loss
+          _ploss_kg: this.percent_e_stove, //Enegy Stove
+          _pyield_std: this.percent_e_elec, //Enegy Elec
+          _pyield_act: this.percent_e_diesel //Enegy Diesel
         }
       ];
+    },
+    // Summary
+    summary() {
+      for (let i = 0; i < this.data_table1.length; i++) {
+        //QTY
+        (this.sum_b_qty = this.data_table1[i]._b_qty + this.sum_b_qty),
+          //STD
+          (this.sum_b_std = this.data_table1[i]._b_std + this.sum_b_std),
+          //ACT
+          (this.sum_b_act = this.data_table1[i]._b_act + this.sum_b_act),
+          //Bundle
+          (this.sum_q_bundle =
+            this.data_table1[i]._q_bundle + this.sum_q_bundle),
+          //Pcs
+          (this.sum_q_pcs = this.data_table1[i]._q_pcs + this.sum_q_pcs),
+          //STD Wgt
+          (this.sum_q_std = this.data_table1[i]._q_std + this.sum_q_std),
+          //Actual Wgt
+          (this.sum_q_act = this.data_table1[i]._q_act + this.sum_q_act),
+          //Return Piece
+          (this.sum_m_return_piece =
+            this.data_table1[i]._m_return_piece + this.sum_m_return_piece),
+          //Return Kg
+          (this.sum_m_return_kg =
+            this.data_table1[i]._m_return_kg + this.sum_m_return_kg),
+          //Cobble Piece
+          (this.sum_m_cobble_piece =
+            this.data_table1[i]._m_cobble_piece + this.sum_m_cobble_piece),
+          //Cobble Kg
+          (this.sum_m_cobble_kg =
+            this.data_table1[i]._m_cobble_kg + this.sum_m_cobble_kg),
+          //Total
+          (this.sum_m_total = this.data_table1[i]._m_total + this.sum_m_total),
+          //Production Loss
+          (this.sum_ploss_kg =
+            this.data_table1[i]._ploss_kg + this.sum_ploss_kg),
+          //Production Yield STD
+          (this.sum_pyield_std =
+            this.data_table1[i]._pyield_std + this.sum_pyield_std),
+          //Production Yield ACT
+          (this.sum_pyield_act =
+            this.data_table1[i]._pyield_act + this.sum_pyield_act),
+          //Enegy Stove
+          (this.sum_e_stove = this.data_table1[i]._e_stove + this.sum_e_stove),
+          //Enegy Elec
+          (this.sum_e_elec = this.data_table1[i]._e_elec + this.sum_e_elec),
+          //Enegy Diesel
+          (this.sum_e_diesel =
+            this.data_table1[i]._e_diesel + this.sum_e_diesel);
+        //console.log(this.data_table1[i]._b_act)
+      }
+      //console.log("Sum : " + this.sum_act);
+      this.percent_b_act = (this.sum_b_act / 1000).toFixed(2);
+      this.percent_q_act = (this.sum_q_act / 1000).toFixed(2);
+      this.percent_m_return_kg = (this.sum_m_return_kg / 1000).toFixed(2);
+      this.percent_m_cobble_kg = (this.sum_m_cobble_kg / 1000).toFixed(2);
+      this.percent_ploss_kg = (this.sum_ploss_kg / 1000).toFixed(2);
+      this.percent_e_stove = (this.sum_e_stove / 100).toFixed(2);
+      this.percent_e_elec = (this.sum_e_elec / 100).toFixed(2);
+      this.percent_e_diesel = (this.sum_e_diesel / 100).toFixed(2);
+      //console.log("Percent : " + this.percent_act);
+    },
+    getProduction_Data() {
+      for (let i = 0; i < this.data_table1.length; i++) {
+        (this.data_table1[i]._no = this.data_table1[i]._e_diesel)(
+          //Billet
+          (this.data_table1[i]._b_heat = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._b_grade = this.data_table1[i]._e_diesel))(
+          (this.data_table1[i]._b_qty = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._b_std = this.data_table1[i]._e_diesel))(
+          (this.data_table1[i]._b_act = this.data_table1[i]._e_diesel)
+        )(
+          //Product
+          (this.data_table1[i]._p_size = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._p_grade = this.data_table1[i]._e_diesel))(
+          //Quantity
+          (this.data_table1[i]._q_bundle = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._q_pcs = this.data_table1[i]._e_diesel))(
+          (this.data_table1[i]._q_std = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._q_act = this.data_table1[i]._e_diesel))(
+          //Miss roll Total
+          (this.data_table1[i]._m_cobble_piece = this.data_table1[i]._e_diesel)
+        )((this.data_table1[i]._m_cobble_kg = this.data_table1[i]._e_diesel)),
+          (this.data_table1[i]._m_return_piece = this.data_table1[i]._e_diesel)(
+            (this.data_table1[i]._m_return_kg = this.data_table1[i]._e_diesel)
+          )((this.data_table1[i]._m_total = this.data_table1[i]._e_diesel))(
+            //Production Loss(kgs)
+            (this.data_table1[i]._ploss_kg = this.data_table1[i]._e_diesel)
+          )(
+            //Product Yield(%)
+            (this.data_table1[i]._pyield_std = this.data_table1[i]._e_diesel)
+          )((this.data_table1[i]._pyield_act = this.data_table1[i]._e_diesel))(
+            //Energy Consumption
+            (this.data_table1[i]._e_stove = this.data_table1[i]._e_diesel)
+          )((this.data_table1[i]._e_elec = this.data_table1[i]._e_diesel))(
+            (this.data_table1[i]._e_diesel = this.data_table1[i]._e_elec)
+          )((this.data_table1[i]._e_elec = this.data_table1[i]._e_diesel));
+      }
+    }
+  },
+  computed: {
+    productReport() {
+      if (
+        localStorage.getItem("localBillet_act") != null ||
+        localStorage.getItem("localBillet_act") != "" ||
+        localStorage.getItem("localQuantity_act") != null ||
+        localStorage.getItem("localQuantity_act") != ""
+      ) {
+        this.$store.commit("setBillet", this.sum_b_act);
+        this.$store.commit("setQuantity", this.sum_q_act);
+      }
+      return true;
     }
   },
   created() {

@@ -158,14 +158,42 @@ export default {
             }
           ]
         },
-        //PP
-        { field: "_PP", key: "c", title: "PP", width: "43%" },
-        //PD
-        { field: "_PD", key: "d", title: "PD", width: "43%" },
-        //MM
-        { field: "_MM", key: "e", title: "MM", width: "47%" },
-        //EM
-        { field: "_EM", key: "f", title: "EM", width: "47%" },
+        //Production
+        {
+          title: "Production",
+          children: [
+            {
+              field: "_PP",
+              key: "c",
+              title: "PP",
+              width: "43%"
+            },
+            {
+              field: "_PD",
+              key: "d",
+              title: "PD",
+              width: "43%"
+            }
+          ]
+        },
+        //MainTenance
+        {
+          title: "MainTenance",
+          children: [
+            {
+              field: "_MM",
+              key: "e",
+              title: "MM",
+              width: "43%"
+            },
+            {
+              field: "_EM",
+              key: "f",
+              title: "EM",
+              width: "43%"
+            }
+          ]
+        },
         //Other
         {
           title: "Other",
@@ -212,7 +240,7 @@ export default {
         { field: "_no_billet", key: "m", title: "No. of Billet", width: "47%" },
         //ปัญหา / Miss Roll
         {
-          title: "ปัญหา / Miss Roll",
+          title: "Miss Roll",
           children: [
             {
               field: "_m_Rerods",

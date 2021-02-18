@@ -22,7 +22,7 @@
                     <v-list-item>
                       <v-list-item-content>Date:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.pro_time }} (hr)
+                        {{ item.pro_time }}
                       </v-list-item-content>
                       <v-list-item-content></v-list-item-content>
                     </v-list-item>
@@ -33,7 +33,7 @@
                       <v-list-item-content>Billet:</v-list-item-content>
                       <v-list-item-content>Grade:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.ava_time }} (min)
+                        {{ item.ava_time }}
                       </v-list-item-content>
                     </v-list-item>
 
@@ -41,7 +41,7 @@
                       <v-list-item-content></v-list-item-content>
                       <v-list-item-content>Length:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.down_time }} (min)
+                        {{ item.down_time }} (m)
                       </v-list-item-content>
                     </v-list-item>
 
@@ -51,7 +51,7 @@
                       <v-list-item-content>FG:</v-list-item-content>
                       <v-list-item-content>Size:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.net_roll }} (min)
+                        {{ item.net_roll }}
                       </v-list-item-content>
                     </v-list-item>
 
@@ -59,7 +59,7 @@
                       <v-list-item-content></v-list-item-content>
                       <v-list-item-content>Grade:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.mill_ava }} (%)
+                        {{ item.mill_ava }}
                       </v-list-item-content>
                     </v-list-item>
 
@@ -67,7 +67,7 @@
                       <v-list-item-content></v-list-item-content>
                       <v-list-item-content>Bundle size:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.roll_speed }} (ton/hr)
+                        {{ item.roll_speed }} (bars/bundle)
                       </v-list-item-content>
                     </v-list-item>
 
@@ -75,7 +75,7 @@
                       <v-list-item-content></v-list-item-content>
                       <v-list-item-content>Cut of length:</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.pro_machine }} (ton/hr)
+                        {{ item.pro_machine }} (m)
                       </v-list-item-content>
                     </v-list-item>
                   </v-list>
@@ -105,15 +105,15 @@
                   <v-list dense>
                     <v-list-item>
                       <v-list-item-content>BL weight : </v-list-item-content>
-                      <v-list-item-content>3SP :</v-list-item-content>
+                      <v-list-item-content><!-- 3SP : --></v-list-item-content>
                       <v-list-item-content class="align-end red--text">
-                        {{ item.ava_time }} (Kgs)
+                        <!-- {{ item.ava_time }} (Kgs) -->
                       </v-list-item-content>
                     </v-list-item>
 
                     <v-list-item>
                       <v-list-item-content></v-list-item-content>
-                      <v-list-item-content>C20 :</v-list-item-content>
+                      <v-list-item-content>Standard :</v-list-item-content>
                       <v-list-item-content class="align-end red--text">
                         {{ item.down_time }} (Kgs)
                       </v-list-item-content>

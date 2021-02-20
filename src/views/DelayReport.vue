@@ -17,6 +17,7 @@
 </template>
 <script>
 import { VeTable } from "vue-easytable";
+import axios from "axios";
 export default {
   components: {
     VeTable
@@ -26,7 +27,7 @@ export default {
       //Data Table
       data_table1: [
         {
-          _until: "22:00 - 22:03",
+          _until: "22:00:00 - 22:03:00",
           //Billet
           _time: 3,
           _PP: 0,
@@ -83,6 +84,8 @@ export default {
       percent_WHD: 0, //WHD
       percent_SMD: 0, //SMD
       percent_Setup: 0, //Setup
+      //Axios
+      url: "https://api.zen.zubbsteel.com/v1/",
       //ตั่งค่า style table
       cellStyleOption: {
         //ตั่งค่าพื้นหลัง header row
@@ -145,7 +148,7 @@ export default {
       //Header
       columns: [
         //Until time
-        { field: "_until", key: "a", title: "ตั้งแต่เวลา", width: "84%" },
+        { field: "_until", key: "a", title: "ตั้งแต่เวลา", width: "100%" },
         //Total time
         {
           title: "เวลารวม",
@@ -382,6 +385,42 @@ export default {
         } */
       ];
     },
+    //เวลาปัจจุบัน YY/MM/DD
+    getTime() {
+      var months_arr = [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ];
+      var date = new Date(Date.now());
+      var year = date.getFullYear();
+      var month = months_arr[date.getMonth()];
+      var day = date.getDate();
+      if (
+        day == 1 ||
+        day == 2 ||
+        day == 3 ||
+        day == 4 ||
+        day == 5 ||
+        day == 6 ||
+        day == 7 ||
+        day == 8 ||
+        day == 9
+      ) {
+        day = "0" + day;
+      }
+      this.emp_date = year + "-" + month + "-" + day;
+    },
+    //สรุปผล
     summary() {
       for (let i = 0; i < this.data_table1.length; i++) {
         //Summary Data
@@ -412,6 +451,15 @@ export default {
         (this.sum_WHD / localStorage.getItem("localAva")) * 100; //WHD
       this.percent_SMD =
         (this.sum_SMD / localStorage.getItem("localAva")) * 100; //SMD
+    },
+    //รับค่า Data Delay
+    getData() {
+      this.getTime();
+      console.log(Date.parse(this.emp_date)/1000);
+      return axios.get(this.url + "delay/" + this.emp_date).then(response => {
+        (this.data_delay = response.data[0]),
+          console.log("Data Delay : " + this.data_delay);
+      });
     }
   },
   computed: {
@@ -429,6 +477,7 @@ export default {
   created() {
     //this.initTableData();
     this.initFooterData();
+    this.getData();
   }
 };
 </script>

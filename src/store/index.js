@@ -11,7 +11,12 @@ export default new Vuex.Store({
     localAva: Vue.localStorage.get("pd_ava"),
     localTotaltime: Vue.localStorage.get("total_time"),
     localBillet_act: Vue.localStorage.get("b_act"),
-    localQuantity_act: Vue.localStorage.get("q_act")
+    localQuantity_act: Vue.localStorage.get("q_act"),
+    product_report: Vue.localStorage.get("product_report"),
+    product_footer: Vue.localStorage.get("product_footer"),
+    delay_report: Vue.localStorage.get("delay_report"),
+    product_data: Vue.localStorage.get("product_data"),
+    loss_report: Vue.localStorage.get("loss_report")
   },
   mutations: {
     //Production Data
@@ -24,6 +29,7 @@ export default new Vuex.Store({
     //Production Report
     setBillet(state, b_act) {
       localStorage.setItem("localBillet_act", b_act);
+      //console.log(localStorage.getItem("localBillet_act"))
     },
     setQuantity(state, q_act) {
       localStorage.setItem("localQuantity_act", q_act);
@@ -32,6 +38,37 @@ export default new Vuex.Store({
     //Delay Report
     setTotaltime(state, total_time) {
       localStorage.setItem("localTotaltime", total_time);
+      //console.log(localStorage.getItem("localTotaltime"))
+    },
+    //เก็บค่า product_report
+    setPR(state, doc) {
+      let doc_data = JSON.stringify(doc);
+      localStorage.setItem("product_report", doc_data);
+      //console.log("product_report" + localStorage.getItem("product_report").length);
+    },
+    //เก็บค่า product_footer
+    setPF(state, doc) {
+      let doc_data = JSON.stringify(doc);
+      localStorage.setItem("product_footer", doc_data);
+      //console.log("product_footer" + localStorage.getItem("product_footer"));
+    },
+    //เก็บค่า delay_report
+    setDR(state, doc) {
+      let doc_data = JSON.stringify(doc);
+      localStorage.setItem("delay_report", doc_data);
+      //console.log("delay_report" + localStorage.getItem("delay_report"));
+    },
+    //เก็บค่า loss_report
+    setLR(state, doc) {
+      let doc_data = JSON.stringify(doc);
+      localStorage.setItem("loss_report", doc_data);
+      //console.log("loss_report" + localStorage.getItem("loss_report"));
+    },
+    //เก็บค่า product_data
+    setPD(state, doc) {
+      let doc_data = JSON.stringify(doc);
+      localStorage.setItem("product_data", doc_data);
+      //console.log("loss_report" + localStorage.getItem("loss_report"));
     }
   },
   actions: {},

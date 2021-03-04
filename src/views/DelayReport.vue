@@ -1,65 +1,39 @@
 <template>
-  <ve-table
-    v-if="delayReport"
-    class="ma-2 caption"
-    rowKeyFieldName="rowkey"
-    fixed-header
-    border-x
-    border-y
-    :scroll-width="1870"
-    :columns="columns"
-    :table-data="data_table1"
-    :footer-data="footerData"
-    :cell-selection-option="cellSelectionOption"
-    :cell-style-option="cellStyleOption"
-    :cell-span-option="cellSpanOption"
-  />
+  <div v-if="data_Now">
+    <ve-table
+      v-if="delayReport"
+      class="ma-2 caption"
+      rowKeyFieldName="rowkey"
+      fixed-header
+      border-x
+      border-y
+      :scroll-width="1870"
+      :columns="columns"
+      :table-data="data_table1"
+      :footer-data="footerData"
+      :cell-selection-option="cellSelectionOption"
+      :cell-style-option="cellStyleOption"
+      :cell-span-option="cellSpanOption"
+    />
+    <!-- <p v-for="item in data_table1" :key="item">{{ item._until}}</p> -->
+  </div>
 </template>
 <script>
 import { VeTable } from "vue-easytable";
 import axios from "axios";
 export default {
+  name: "delay-report",
+  props: ["fact", "date"],
   components: {
     VeTable
   },
   data() {
     return {
       //Data Table
-      data_table1: [
-        {
-          _until: "22:00:00 - 22:03:00",
-          //Billet
-          _time: 3,
-          _PP: 0,
-          _PD: 3,
-          _MM: 0,
-          _EM: 0,
-          //Other
-          _o_UTD: 0,
-          _o_QA: 0,
-          _o_IT: 0,
-          _o_WHD: 0,
-          _o_SMD: 0,
-          _o_Setup: 0,
-          //No. of Billet
-          _no_billet: "",
-          //ปัญหา/Miss Roll
-          _m_Rerods: 0,
-          _m_Cobble: 0,
-          _m_Heat: "",
-          _m_Grade: "",
-          //Area
-          _zone: "RH",
-          //ปัญหาและรายละเอียด
-          _detail: "ปล่อย Auto Billet ไม่ได้",
-          //สาเหตุ
-          _cause: "walk Auto ไม่ได้ ไม่ถึงตำแหน่ง",
-          //ผู้รับเรื่อง
-          _simple_fix: ""
-        }
-      ],
+      data_table1: [],
+      data_delay: [],
       //Summary Data
-      sum_time: 0, //Time
+      sum_time: null, //Time
       sum_PP: 0, //PP
       sum_PD: 0, //PD
       sum_MM: 0, //MM
@@ -70,8 +44,8 @@ export default {
       sum_WHD: 0, //WHD
       sum_SMD: 0, //SMD
       sum_Setup: 0, //Setup
-      sum_Rerods: 0, //Return
-      sum_Cobble: 0, //Cobble
+      sum_Rerods: null, //Return
+      sum_Cobble: null, //Cobble
       //Percent Data
       percent_time: 0, //Time
       percent_PP: 0, //PP
@@ -85,7 +59,7 @@ export default {
       percent_SMD: 0, //SMD
       percent_Setup: 0, //Setup
       //Axios
-      url: "https://api.zen.zubbsteel.com/v1/",
+      url: "http://api.zen.zubbsteel.com/v1/",
       //ตั่งค่า style table
       cellStyleOption: {
         //ตั่งค่าพื้นหลัง header row
@@ -114,7 +88,7 @@ export default {
               column.field == "_m_Rerods" ||
               column.field == "_m_Cobble"
             ) {
-              return "table-footer-cell-class3";
+              return "table-footer-cell-delay";
             }
           }
           if (rowIndex === 1) {
@@ -129,10 +103,9 @@ export default {
               column.field == "_o_QA" ||
               column.field == "_o_IT" ||
               column.field == "_o_WHD" ||
-              column.field == "_o_SMD" ||
-              column.field == "_o_Setup"
+              column.field == "_o_SMD"
             ) {
-              return "table-footer-cell-class3";
+              return "table-footer-cell-delay";
             }
           }
         }
@@ -249,13 +222,13 @@ export default {
               field: "_m_Rerods",
               key: "n",
               title: "Return",
-              width: "74%"
+              width: "45%"
             },
             {
               field: "_m_Cobble",
               key: "o",
               title: "Cobble",
-              width: "74%"
+              width: "45%"
             },
             {
               field: "_m_Heat",
@@ -272,7 +245,7 @@ export default {
           ]
         },
         //Area
-        { field: "_zone", key: "r", title: "Area", width: "47%" },
+        { field: "_zone", key: "r", title: "Area", width: "60%" },
         //Detail
         {
           field: "_detail",
@@ -287,7 +260,7 @@ export default {
           field: "_simple_fix",
           key: "u",
           title: "การแก้ไขเบื้องต้น",
-          width: "100%"
+          width: "200%"
         }
       ],
       tableData: []
@@ -376,13 +349,6 @@ export default {
           _o_SMD: this.percent_SMD.toFixed(1)
           //_o_Setup: this.percent_Setup.toFixed(2)
         }
-        /* {
-          rowkey: 2,
-          _PP: 1100.0,
-          _PD: 0.49,
-          _MM: 48.64,
-          _EM: 67.27
-        } */
       ];
     },
     //เวลาปัจจุบัน YY/MM/DD
@@ -435,8 +401,28 @@ export default {
         this.sum_WHD = this.data_table1[i]._o_WHD + this.sum_WHD; //WHD
         this.sum_SMD = this.data_table1[i]._o_SMD + this.sum_SMD; //SMD
         this.sum_Setup = this.data_table1[i]._o_Setup + this.sum_Setup; //Setup
+        if (
+          this.data_table1[i]._m_Rerods == null ||
+          this.data_table1[i]._m_Rerods == ""
+        ) {
+          this.sum_Rerods = 0 + this.sum_Rerods; //Return = 0
+        } else {
+          this.sum_Rerods =
+            parseFloat(this.data_table1[i]._m_Rerods) + this.sum_Rerods; //Return
+        }
+        if (
+          this.data_table1[i]._m_Cobble == null ||
+          this.data_table1[i]._m_Cobble == ""
+        ) {
+          this.sum_Cobble = 0 + this.sum_Cobble; //Cobble = 0
+        } else {
+          this.sum_Cobble =
+            parseFloat(this.data_table1[i]._m_Cobble) + this.sum_Cobble; //Cobble
+        }
       }
+      this.$store.commit("setTotaltime", this.commit_sum);
       //Percent Data
+      //setTimeout(() => (this.percent_time = (this.sum_time / localStorage.getItem("localAva")) * 100), 2000), //Time
       this.percent_time =
         (this.sum_time / localStorage.getItem("localAva")) * 100; //Time
       this.percent_PP = (this.sum_PP / localStorage.getItem("localAva")) * 100; //PP
@@ -455,11 +441,119 @@ export default {
     //รับค่า Data Delay
     getData() {
       this.getTime();
-      console.log(Date.parse(this.emp_date)/1000);
-      return axios.get(this.url + "delay/" + this.emp_date).then(response => {
-        (this.data_delay = response.data[0]),
-          console.log("Data Delay : " + this.data_delay);
-      });
+      return axios
+        .get(this.url + "delay/" + this.date + "/" + this.fact)
+        .then(response => {
+          this.data_delay = response.data;
+          this.pushDataNull();
+          if (this.data_delay == null || this.data_delay == "") {
+            this.pushDataNull();
+          } else {
+            this.pushData();
+          }
+        });
+    },
+    async pushData() {
+      for (let i = 0; i < this.data_delay.length; i++) {
+        this.data_table1[i] = {
+          _until:
+            this.data_delay[i].StartTime + " - " + this.data_delay[i].EndTime,
+          //Billet
+          _time: this.data_delay[i].Minute,
+          _PP: null,
+          _PD: null,
+          _MM: null,
+          _EM: null,
+          //Other
+          _o_UTD: null,
+          _o_QA: null,
+          _o_IT: null,
+          _o_WHD: null,
+          _o_SMD: null,
+          _o_Setup: null,
+          //No. of Billet
+          _no_billet: this.data_delay[i].NoOfBillet,
+          //ปัญหา/Miss Roll
+          _m_Rerods: this.data_delay[i].Return,
+          _m_Cobble: this.data_delay[i].Cobble,
+          _m_Heat: this.data_delay[i].HeatNo,
+          _m_Grade: this.data_delay[i].Grade,
+          //Area
+          _zone: this.data_delay[i].Area,
+          //ปัญหาและรายละเอียด
+          _detail: this.data_delay[i].Problem,
+          //สาเหตุ
+          _cause: this.data_delay[i].Cause,
+          //แก้ไขปัญหาเริ่มต้น
+          _simple_fix: this.data_delay[i].Resolve
+        };
+        this.formatData(i);
+      }
+      //console.log(this.data_table1);
+      this.data_table1.push();
+      this.$store.commit("setDR", this.data_table1);
+    },
+    //Push Data Null
+    pushDataNull() {
+      this.data_table1 = [];
+      //Summary Data
+      (this.sum_time = 0), //Time
+        (this.sum_PP = 0), //PP
+        (this.sum_PD = 0), //PD
+        (this.sum_MM = 0), //MM
+        (this.sum_EM = 0), //EM
+        (this.sum_UTD = 0), //UTD
+        (this.sum_QA = 0), //QA
+        (this.sum_IT = 0), //IT
+        (this.sum_WHD = 0), //WHD
+        (this.sum_SMD = 0), //SMD
+        (this.sum_Setup = 0), //Setup
+        (this.sum_Rerods = null), //Return
+        (this.sum_Cobble = null), //Cobble
+        //Percent Data
+        (this.percent_time = 0), //Time
+        (this.percent_PP = 0), //PP
+        (this.percent_PD = 0), //PD
+        (this.percent_MM = 0), //MM
+        (this.percent_EM = 0), //EM
+        (this.percent_UTD = 0), //UTD
+        (this.percent_QA = 0), //QA
+        (this.percent_IT = 0), //IT
+        (this.percent_WHD = 0), //WHD
+        (this.percent_SMD = 0), //SMD
+        (this.percent_Setup = 0); //Setup
+    },
+    async formatData(i) {
+      if (this.data_delay[i].Group == "PP") {
+        this.data_table1[i]._PP = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "PD") {
+        this.data_table1[i]._PD = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "MM") {
+        this.data_table1[i]._MM = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "EM") {
+        this.data_table1[i]._EM = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "UTD") {
+        this.data_table1[i]._o_UTD = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "QA") {
+        this.data_table1[i]._o_QA = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "IT") {
+        this.data_table1[i]._o_IT = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "WHD") {
+        this.data_table1[i]._o_WHD = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "SMD") {
+        this.data_table1[i]._o_SMD = this.data_delay[i].Minute;
+      }
+      if (this.data_delay[i].Group == "SET UP") {
+        this.data_table1[i]._o_Setup = this.data_delay[i].Minute;
+      }
     }
   },
   computed: {
@@ -468,24 +562,36 @@ export default {
         localStorage.getItem("localTotaltime") != null ||
         localStorage.getItem("localTotaltime") != ""
       ) {
-        this.$store.commit("setTotaltime", this.sum_time);
-        console.log("total time :" + localStorage.getItem("localTotaltime"));
+        //this.$store.commit("setTotaltime", this.sum_time);
+        this.initFooterData();
       }
       return true;
+    },
+    commit_sum() {
+      return this.sum_time;
+    },
+    //แสดงข้อมูลตามวันที่ และ โรงรีด
+    data_Now() {
+      if (this.date != null || this.fact != null) {
+        this.getData();
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   created() {
     //this.initTableData();
-    this.initFooterData();
-    this.getData();
+    //this.getData();
+    //this.initFooterData();
   }
 };
 </script>
 
 <style>
 /* footer css */
-.table-footer-cell-class3 {
-  background: #addeff !important;
+.table-footer-cell-delay {
+  background: #feffd5 !important; /* addeff */
   color: rgb(0, 0, 0) !important;
 }
 </style>

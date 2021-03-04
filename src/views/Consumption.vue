@@ -95,15 +95,28 @@ export default {
           }
         },
         //ตั่งค่าพื้นหลัง body column
-        bodyCellClass: ({ column }) => {
+        bodyCellClass: ({ column, rowIndex }) => {
           if (
             column.field === "_until" ||
-            column.field === "_total" ||
+            /* column.field === "_total" ||
             column.field === "_p_rolling" ||
-            column.field === "_p_total" ||
+            column.field === "_p_total" || */
             column.field === "_unit"
           ) {
             return "table-body-cell-consumption";
+          }
+          if (
+            (rowIndex == 0 && column.field === "_total") ||
+            column.field === "_p_rolling" ||
+            column.field === "_p_total" ||
+            (rowIndex == 1 && column.field === "_total") ||
+            column.field === "_p_rolling" ||
+            column.field === "_p_total" ||
+            (rowIndex == 2 && column.field === "_total") ||
+            column.field === "_p_rolling" ||
+            column.field === "_p_total"
+          ) {
+            return "table-summary-cell-consumption";
           }
         }
       },
@@ -218,5 +231,10 @@ export default {
 .table-body-cell-consumption {
   background: #addeff !important;
   color: rgb(0, 0, 0) !important;
+}
+/* summary */
+.table-summary-cell-consumption {
+  background: #feffd5 !important;
+  color: rgb(255, 0, 0) !important;
 }
 </style>

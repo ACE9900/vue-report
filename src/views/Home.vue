@@ -59,7 +59,7 @@ export default {
     DelayReport,
     Consumption,
     LossReport,
-    ProductionData
+    ProductionData,
   },
   data() {
     return {
@@ -94,7 +94,7 @@ export default {
           //Energy Consumption
           _e_stove: "375",
           _e_elec: "716",
-          _e_diesel: "0"
+          _e_diesel: "0",
         },
         {
           _no: "1",
@@ -126,7 +126,7 @@ export default {
           //Energy Consumption
           _e_stove: "2153",
           _e_elec: "4114",
-          _e_diesel: "0"
+          _e_diesel: "0",
         },
         {
           _no: "1",
@@ -158,8 +158,8 @@ export default {
           //Energy Consumption
           _e_stove: "375",
           _e_elec: "716",
-          _e_diesel: "0"
-        }
+          _e_diesel: "0",
+        },
       ],
       data_test: [
         { text: "Date :", value: "2/1/2564" },
@@ -168,14 +168,14 @@ export default {
         { text: "Size :", value: "RB6" },
         { text: "Grade :", value: "SR24" },
         { text: "Bundle size :", value: "Coil" },
-        { text: "Cut of length :", value: "Coil", class: "blue lighten-5" }
+        { text: "Cut of length :", value: "Coil", class: "blue lighten-5" },
       ],
-      itemsPerPage: 4
+      itemsPerPage: 4,
     };
   },
   created() {
     console.log(this.data_table1);
-  }
+  },
 };
 </script>
 

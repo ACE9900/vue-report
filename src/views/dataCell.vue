@@ -1,324 +1,354 @@
 <template>
   <v-main>
-    <v-btn elevation="2" outlined rounded @click="onexport">
-      Excel download
-      <table id="sheetjs" hidden>
-        <tr>
-          <th colspan="2" rowspan="3">Zubb Steel</th>
-          <th colspan="17" rowspan="3">รายงานผลการรีดเหล็กประจำวัน RMD7</th>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-          <th>เรียน</th>
-        </tr>
-        <tr>
-          <th>Date :</th>
-          <th colspan="2">18/02/2564</th>
-          <th v-for="i in 12" :key="i"></th>
-          <th rowspan="3">BL weight :</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th rowspan="2">Billet :</th>
-          <th>Grade :</th>
-          <th>M12</th>
-          <th v-for="i in 12" :key="i"></th>
-          <th>Standard :</th>
-          <th></th>
-          <th>Kgs</th>
-        </tr>
-        <tr>
-          <th>Length :</th>
-          <th>12</th>
-          <th>m</th>
-          <th v-for="i in 11" :key="i"></th>
-          <th>Actual :</th>
-          <th></th>
-          <th>Kgs</th>
-        </tr>
-        <tr>
-          <th rowspan="4">FG :</th>
-          <th>Size :</th>
-          <th>5.5mm.</th>
-          <th v-for="i in 12" :key="i"></th>
-          <th colspan="2" rowspan="2">FG Standard weight :</th>
-          <th>Coil</th>
-          <th>Kgs/m</th>
-        </tr>
-        <tr>
-          <th>Grade :</th>
-          <th>SWRM12</th>
-          <th v-for="i in 12" :key="i"></th>
-          <th>Coil</th>
-          <th>Kgs/bundle</th>
-        </tr>
-        <tr>
-          <th colspan="2">Bundle size :</th>
-          <th>0</th>
-          <th>bars/bundle</th>
-        </tr>
-        <tr>
-          <th colspan="2">Cut of Length :</th>
-          <th></th>
-          <th>m</th>
-        </tr>
-        <tr></tr>
-        <tr>
-          <th colspan="3">Production Report</th>
-        </tr>
-        <tr>
-          <th rowspan="4">Item</th>
-          <th colspan="5">Billet</th>
-          <th colspan="2" rowspan="2">Product</th>
-          <th colspan="4">Quantity</th>
-          <th colspan="5" rowspan="2">Miss roll Total</th>
-          <th rowspan="2">Production Loss(kgs)</th>
-          <th colspan="2" rowspan="2">Product Yield(%)</th>
-          <th colspan="3">Energy Consumption</th>
-        </tr>
-        <tr>
-          <th rowspan="3">Heat No</th>
-          <th rowspan="3">Grade</th>
-          <th colspan="3">Billet Usage</th>
-          <th colspan="4">ปริมาณผลผลิต</th>
-          <th colspan="3">ปริมาณการใช้พลังงานเพื่อการผลิตโรงรีด</th>
-        </tr>
-        <tr>
-          <th>QTY</th>
-          <th>STD</th>
-          <th>ACT</th>
-          <th>Size</th>
-          <th>Grade</th>
-          <th>Bundle/Coil</th>
-          <th>Pcs</th>
-          <th>Std Wgt</th>
-          <th>Actual Wgt</th>
-          <th colspan="2">Return</th>
-          <th colspan="2">Cobble</th>
-          <th>Total</th>
-          <th>สูญเสีย</th>
-          <th>STD</th>
-          <th>ACT</th>
-          <th>น้ำมันเตา</th>
-          <th>ไฟฟ้า</th>
-          <th>น้ำมันดีเซล</th>
-        </tr>
-        <tr>
-          <th>แท่ง</th>
-          <th>(ton)</th>
-          <th>(ton)</th>
-          <th>ขนาด</th>
-          <th>ชั้นคุณภาพ</th>
-          <th>(มัด/ขด)</th>
-          <th>เส้น</th>
-          <th>(ton)</th>
-          <th>(ton)</th>
-          <th>แท่ง</th>
-          <th>(kg)</th>
-          <th>แท่ง</th>
-          <th>(kg)</th>
-          <th>%</th>
-          <th>(kg)</th>
-          <th>%</th>
-          <th>%</th>
-          <th>litre</th>
-          <th>Kw</th>
-          <th>litre</th>
-        </tr>
-        <tr v-for="item in data_table1" :key="item._no">
-          <td>{{ item._no }}</td>
-          <td>{{ item._b_heat }}</td>
-          <td>{{ item._b_grade }}</td>
-          <td>{{ item._b_qty }}</td>
-          <td>{{ item._b_std }}</td>
-          <td>{{ item._b_act }}</td>
-          <td>{{ item._p_size }}</td>
-          <td>{{ item._p_grade }}</td>
-          <td>{{ item._q_bundle }}</td>
-          <td>{{ item._q_pcs }}</td>
-          <td>{{ item._q_std }}</td>
-          <td>{{ item._q_act }}</td>
-          <td>{{ item._m_cobble_piece }}</td>
-          <td>{{ item._m_cobble_kg }}</td>
-          <td>{{ item._m_return_piece }}</td>
-          <td>{{ item._m_return_kg }}</td>
-          <td>{{ item._m_total }}</td>
-          <td>{{ item._ploss_kg }}</td>
-          <td>{{ item._pyield_std }}</td>
-          <td>{{ item._pyield_act }}</td>
-          <td>{{ item._e_stove }}</td>
-          <td>{{ item._e_elec }}</td>
-          <td>{{ item._e_diesel }}</td>
-        </tr>
-        <tr>
-          <th colspan="3">Total</th>
-        </tr>
-        <tr></tr>
-        <tr>
-          <th colspan="3" class="red--text">Delay Report</th>
-        </tr>
-        <tr>
-          <th rowspan="2">ตั้งแต่เวลา</th>
-          <th rowspan="2">เวลารวม (นาที)</th>
-          <th colspan="2">Production</th>
-          <th colspan="2">MainTenance</th>
-          <th colspan="6">Other</th>
-          <th rowspan="2">No. of Billet</th>
-          <th colspan="4">Miss Roll</th>
-          <th rowspan="2">Area</th>
-          <th rowspan="2">ปัญหา/รายละเอียด</th>
-          <th rowspan="2">สาเหตุ</th>
-          <th rowspan="2">การแก้ไขเบื้องต้น</th>
-        </tr>
-        <tr>
-          <th>PP</th>
-          <th>PD</th>
-          <th>MM</th>
-          <th>EM</th>
-          <th>UTD</th>
-          <th>QA</th>
-          <th>IT</th>
-          <th>WHD</th>
-          <th>SMD</th>
-          <th>Setup</th>
-          <th>Return</th>
-          <th>Cobble</th>
-          <th>Heat No</th>
-          <th>Grade</th>
-        </tr>
-        <tr v-for="item in data_test2" :key="item.text">
-          <td>{{ item.text }}</td>
-        </tr>
-        <tr>
-          <th>เวลารวม(นาที)</th>
-        </tr>
-        <tr>
-          <th>%</th>
-        </tr>
-        <tr></tr>
-        <tr>
-          <th colspan="10" class="red--text">Consumption Data</th>
-          <th></th>
-          <th colspan="6" class="red--text">Production Data</th>
-        </tr>
-        <tr>
-          <th rowspan="2"></th>
-          <th rowspan="2">ก่อนจุดเตา</th>
-          <th rowspan="2">ก่อนรีด</th>
-          <th rowspan="2">หลังรีด</th>
-          <th rowspan="2">ใช้จุดเตา</th>
-          <th rowspan="2">ใช้รีด</th>
-          <th rowspan="2">รวม</th>
-          <th colspan="2">อัตราการใช้พลังงาน</th>
-          <th rowspan="2">หน่วย</th>
-          <th></th>
-          <th>Production time</th>
-          <th>24</th>
-          <th>hr</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>Rolling</th>
-          <th>Total</th>
-          <th></th>
-          <th>Available time</th>
-          <th>1440</th>
-          <th>min</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>ดีเซล(Lirte)</th>
-          <th v-for="i in 8" :key="i"></th>
-          <th>ลิตร/ตัน</th>
-          <th></th>
-          <th>Down time</th>
-          <th>155</th>
-          <th>min</th>
-          <th>10.8</th>
-          <th>%</th>
-          89.2
-        </tr>
-        <tr>
-          <th>น้ำมันเตา(Lirte)</th>
-          <th v-for="i in 8" :key="i"></th>
-          <th>ลิตร/ตัน</th>
-          <th></th>
-          <th>Down time</th>
-          <th>1285</th>
-          <th>min</th>
-          <th>89.2</th>
-          <th>%</th>
-        </tr>
-        <tr>
-          <th>ไฟฟ้า(kwh)</th>
-          <th v-for="i in 8" :key="i"></th>
-          <th>ลิตร/ตัน</th>
-          <th></th>
-          <th>Mill Availabilty</th>
-          <th>10.76</th>
-          <th>%</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th v-for="i in 11" :key="i"></th>
-          <th>Rolling speed (BL)</th>
-          <th>0.00</th>
-          <th>ton/hr</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th colspan="8" class="red--text">LOSS Report</th>
-          <th v-for="i in 3" :key="i"></th>
-          <th>Rolling speed (BL)</th>
-          <th>26.68</th>
-          <th>ton/hr</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>CV1</th>
-          <th>CV2</th>
-          <th>Cold Shear</th>
-          <th>SCALE</th>
-          <th>หางเหล็ก</th>
-          <th>Reject</th>
-          <th>TOTAL</th>
-          <th v-for="i in 4" :key="i"></th>
-          <th>Rolling speed (BL)</th>
-          <th>89.92</th>
-          <th>ton/hr</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>กก.</th>
-        </tr>
-        <tr>
-          <th>0</th>
-          <th>0</th>
-          <th>0</th>
-          <th>0</th>
-          <th>0</th>
-          <th>0</th>
-          <th>0</th>
-          <th>%</th>
-        </tr>
-      </table>
-    </v-btn>
+    <div v-if="data_Now">
+      <v-btn elevation="2" outlined rounded @click="onexport">
+        Excel download
+        <table id="sheetjs" hidden v-if="get_ProductReport">
+          <tr>
+            <th colspan="2" rowspan="3">Zubb Steel</th>
+            <th colspan="17" rowspan="3">รายงานผลการรีดเหล็กประจำวัน RMD7</th>
+          </tr>
+          <tr></tr>
+          <tr></tr>
+          <tr>
+            <th>เรียน</th>
+          </tr>
+          <tr>
+            <th>Date :</th>
+            <th colspan="2">18/02/2564</th>
+            <th v-for="i in 12" :key="i"></th>
+            <th rowspan="3">BL weight :</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th rowspan="2">Billet :</th>
+            <th>Grade :</th>
+            <th>M12</th>
+            <th v-for="i in 12" :key="i"></th>
+            <th>Standard :</th>
+            <th></th>
+            <th>Kgs</th>
+          </tr>
+          <tr>
+            <th>Length :</th>
+            <th>12</th>
+            <th>m</th>
+            <th v-for="i in 11" :key="i"></th>
+            <th>Actual :</th>
+            <th></th>
+            <th>Kgs</th>
+          </tr>
+          <tr>
+            <th rowspan="4">FG :</th>
+            <th>Size :</th>
+            <th>5.5mm.</th>
+            <th v-for="i in 12" :key="i"></th>
+            <th colspan="2" rowspan="2">FG Standard weight :</th>
+            <th>Coil</th>
+            <th>Kgs/m</th>
+          </tr>
+          <tr>
+            <th>Grade :</th>
+            <th>SWRM12</th>
+            <th v-for="i in 12" :key="i"></th>
+            <th>Coil</th>
+            <th>Kgs/bundle</th>
+          </tr>
+          <tr>
+            <th colspan="2">Bundle size :</th>
+            <th>0</th>
+            <th>bars/bundle</th>
+          </tr>
+          <tr>
+            <th colspan="2">Cut of Length :</th>
+            <th></th>
+            <th>m</th>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th colspan="3">Production Report</th>
+          </tr>
+          <tr>
+            <th rowspan="4">Item</th>
+            <th colspan="5">Billet</th>
+            <th colspan="2" rowspan="2">Product</th>
+            <th colspan="4">Quantity</th>
+            <th colspan="5" rowspan="2">Miss roll Total</th>
+            <th rowspan="2">Production Loss(kgs)</th>
+            <th colspan="2" rowspan="2">Product Yield(%)</th>
+            <th colspan="3">Energy Consumption</th>
+          </tr>
+          <tr>
+            <th rowspan="3">Heat No</th>
+            <th rowspan="3">Grade</th>
+            <th colspan="3">Billet Usage</th>
+            <th colspan="4">ปริมาณผลผลิต</th>
+            <th colspan="3">ปริมาณการใช้พลังงานเพื่อการผลิตโรงรีด</th>
+          </tr>
+          <tr>
+            <th>QTY</th>
+            <th>STD</th>
+            <th>ACT</th>
+            <th>Size</th>
+            <th>Grade</th>
+            <th>Bundle/Coil</th>
+            <th>Pcs</th>
+            <th>Std Wgt</th>
+            <th>Actual Wgt</th>
+            <th colspan="2">Return</th>
+            <th colspan="2">Cobble</th>
+            <th>Total</th>
+            <th>สูญเสีย</th>
+            <th>STD</th>
+            <th>ACT</th>
+            <th>น้ำมันเตา</th>
+            <th>ไฟฟ้า</th>
+            <th>น้ำมันดีเซล</th>
+          </tr>
+          <tr>
+            <th>แท่ง</th>
+            <th>(ton)</th>
+            <th>(ton)</th>
+            <th>ขนาด</th>
+            <th>ชั้นคุณภาพ</th>
+            <th>(มัด/ขด)</th>
+            <th>เส้น</th>
+            <th>(ton)</th>
+            <th>(ton)</th>
+            <th>แท่ง</th>
+            <th>(kg)</th>
+            <th>แท่ง</th>
+            <th>(kg)</th>
+            <th>%</th>
+            <th>(kg)</th>
+            <th>%</th>
+            <th>%</th>
+            <th>litre</th>
+            <th>Kw</th>
+            <th>litre</th>
+          </tr>
+          <tr v-for="item in data_test" :key="item._no">
+            <td>{{ item._no }}</td>
+            <td>{{ item._b_heat }}</td>
+            <td>{{ item._b_grade }}</td>
+            <td>{{ item._b_qty }}</td>
+            <td>{{ item._b_std }}</td>
+            <td>{{ item._b_act }}</td>
+            <td>{{ item._p_size }}</td>
+            <td>{{ item._p_grade }}</td>
+            <td>{{ item._q_bundle }}</td>
+            <td>{{ item._q_pcs }}</td>
+            <td>{{ item._q_std }}</td>
+            <td>{{ item._q_act }}</td>
+            <td>{{ item._m_return_piece }}</td>
+            <td>{{ item._m_return_kg }}</td>
+            <td>{{ item._m_cobble_piece }}</td>
+            <td>{{ item._m_cobble_kg }}</td>
+            <td>{{ item._m_total }}</td>
+            <td>{{ item._ploss_kg }}</td>
+            <td>{{ item._pyield_std }}</td>
+            <td>{{ item._pyield_act }}</td>
+            <td>{{ item._e_stove }}</td>
+            <td>{{ item._e_elec }}</td>
+            <td>{{ item._e_diesel }}</td>
+          </tr>
+          <!-- <tr>
+            <th colspan="3">Total</th>
+          </tr> -->
+          <tr v-for="item in footer_test" :key="item.total">
+            <td colspan="3">{{ item.total }}</td>
+            <td>{{ item.b_qty }}</td>
+            <td>{{ item.b_std }}</td>
+            <td>{{ item.b_act }}</td>
+            <td>{{ item.q_bundle }}</td>
+            <td>{{ item.q_pcs }}</td>
+            <td>{{ item.q_std }}</td>
+            <td>{{ item.q_act }}</td>
+            <td>{{ item.m_return_piece }}</td>
+            <td>{{ item.m_return_kg }}</td>
+            <td>{{ item.m_cobble_piece }}</td>
+            <td>{{ item.m_cobble_kg }}</td>
+            <td>{{ item.m_total }}</td>
+            <td>{{ item.ploss_kg }}</td>
+            <td>{{ item.pyield_std }}</td>
+            <td>{{ item.pyield_act }}</td>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th colspan="3" class="red--text">Delay Report</th>
+          </tr>
+          <tr>
+            <th rowspan="2">ตั้งแต่เวลา</th>
+            <th rowspan="2">เวลารวม (นาที)</th>
+            <th colspan="2">Production</th>
+            <th colspan="2">MainTenance</th>
+            <th colspan="6">Other</th>
+            <th rowspan="2">No. of Billet</th>
+            <th colspan="4">Miss Roll</th>
+            <th rowspan="2">Area</th>
+            <th rowspan="2">ปัญหา/รายละเอียด</th>
+            <th rowspan="2">สาเหตุ</th>
+            <th rowspan="2">การแก้ไขเบื้องต้น</th>
+          </tr>
+          <tr>
+            <th>PP</th>
+            <th>PD</th>
+            <th>MM</th>
+            <th>EM</th>
+            <th>UTD</th>
+            <th>QA</th>
+            <th>IT</th>
+            <th>WHD</th>
+            <th>SMD</th>
+            <th>Setup</th>
+            <th>Return</th>
+            <th>Cobble</th>
+            <th>Heat No</th>
+            <th>Grade</th>
+          </tr>
+          <tr v-for="item in data_test2" :key="item._until">
+            <td width="50%">{{ item._until }}</td>
+            <td>{{ item._time }}</td>
+            <td>{{ item._PP }}</td>
+            <td>{{ item._PD }}</td>
+            <td>{{ item._MM }}</td>
+            <td>{{ item._EM }}</td>
+            <td>{{ item._o_UTD }}</td>
+            <td>{{ item._o_QA }}</td>
+            <td>{{ item._o_IT }}</td>
+            <td>{{ item._o_WHD }}</td>
+            <td>{{ item._o_SMD }}</td>
+            <td>{{ item._o_Setup }}</td>
+            <td>{{ item._no_billet }}</td>
+            <td>{{ item._m_Rerods }}</td>
+            <td>{{ item._m_Cobble }}</td>
+            <td>{{ item._m_Heat }}</td>
+            <td>{{ item._m_Grade }}</td>
+            <td>{{ item._zone }}</td>
+            <td>{{ item._detail }}</td>
+            <td>{{ item._cause }}</td>
+            <td>{{ item._simple_fix }}</td>
+          </tr>
+          <tr>
+            <th>เวลารวม(นาที)</th>
+          </tr>
+          <tr>
+            <th>%</th>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th colspan="10" class="red--text">Consumption Data</th>
+            <th></th>
+            <th colspan="6" class="red--text">Production Data</th>
+          </tr>
+          <tr>
+            <th rowspan="2"></th>
+            <th rowspan="2">ก่อนจุดเตา</th>
+            <th rowspan="2">ก่อนรีด</th>
+            <th rowspan="2">หลังรีด</th>
+            <th rowspan="2">ใช้จุดเตา</th>
+            <th rowspan="2">ใช้รีด</th>
+            <th rowspan="2">รวม</th>
+            <th colspan="2">อัตราการใช้พลังงาน</th>
+            <th rowspan="2">หน่วย</th>
+            <th></th>
+            <th>Production time</th>
+            <th>{{ product_data.pro_time }}</th>
+            <th>hr</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>Rolling</th>
+            <th>Total</th>
+            <th></th>
+            <th>Available time</th>
+            <th>{{ product_data.ava_time }}</th>
+            <th>min</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>ดีเซล(Lirte)</th>
+            <th v-for="i in 8" :key="i"></th>
+            <th>ลิตร/ตัน</th>
+            <th></th>
+            <th>Down time</th>
+            <th>{{ product_data.down_time }}</th>
+            <th>min</th>
+            <th>{{ product_data.per_downtime }}</th>
+            <th>%</th>
+            89.2
+          </tr>
+          <tr>
+            <th>น้ำมันเตา(Lirte)</th>
+            <th v-for="i in 8" :key="i"></th>
+            <th>ลิตร/ตัน</th>
+            <th></th>
+            <th>Net Rolling</th>
+            <th>{{ product_data.net_roll }}</th>
+            <th>min</th>
+            <th>{{ product_data.per_netroll }}</th>
+            <th>%</th>
+          </tr>
+          <tr>
+            <th>ไฟฟ้า(kwh)</th>
+            <th v-for="i in 8" :key="i"></th>
+            <th>ลิตร/ตัน</th>
+            <th></th>
+            <th>Mill Availabilty</th>
+            <th>{{ product_data.mill_ava }}</th>
+            <th>%</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th v-for="i in 11" :key="i"></th>
+            <th>Rolling speed (BL)</th>
+            <th>{{ product_data.roll_speed }}</th>
+            <th>ton/hr</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="8" class="red--text">LOSS Report</th>
+            <th v-for="i in 3" :key="i"></th>
+            <th>Productivity of Machine</th>
+            <th>{{ product_data.pro_machine }}</th>
+            <th>ton/hr</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>CV1</th>
+            <th>CV2</th>
+            <th>Cold Shear</th>
+            <th>SCALE</th>
+            <th>หางเหล็ก</th>
+            <th>Reject</th>
+            <th>TOTAL</th>
+            <th v-for="i in 4" :key="i"></th>
+            <th>Run Factor (BL)</th>
+            <th>{{ product_data.run_factor }}</th>
+            <th>ton/hr</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr v-for="item in loss_data" :key="item._cv1">
+            <th>{{ item._cv1 }}</th>
+            <th>{{ item._cv2 }}</th>
+            <th>{{ item._coldshear }}</th>
+            <th>{{ item._scale }}</th>
+            <th>{{ item._irontail }}</th>
+            <th>{{ item._reject }}</th>
+            <th>{{ item._total }}</th>
+            <th>{{ item._unit }}</th>
+          </tr>
+        </table>
+      </v-btn>
+    </div>
   </v-main>
 </template>
 
@@ -326,6 +356,7 @@
 import XLSX from "xlsx";
 
 export default {
+  props: ["fact", "date"],
   data: () => ({
     Datas: {
       data: [
@@ -529,24 +560,11 @@ export default {
         _e_diesel: 0
       }
     ],
-    data_test: [
-      { text: "1" },
-      { text: "2" },
-      { text: "3" },
-      { text: "4" },
-      { text: "5" },
-      { text: "6" },
-      { text: "7" }
-    ],
-    data_test2: [
-      { text: "8" },
-      { text: "9" },
-      { text: "10" },
-      { text: "11" },
-      { text: "12" },
-      { text: "13" },
-      { text: "14" }
-    ]
+    data_test: [],
+    data_test2: [],
+    footer_test: [],
+    product_data: [],
+    loss_data: []
   }),
   methods: {
     onexport() {
@@ -590,10 +608,43 @@ export default {
         { s: { r: 14, c: 20 }, e: { r: 14, c: 21 } } //ปริมาณการใช้พลังงานเพื่อการผลิตโรงรีด
       ];
       ws["!merges"] = merge;
-      /* XLSX.utils.book_append_sheet(wb, ws, "animals");
-      XLSX.utils.table_to_book(wb, ws, "animals2"); */
+      ws["A1"] = {
+        font: {
+          sz: 20,
+          bold: true
+        },
+        alignment: {
+          horizontal: "center",
+          vertical: "center",
+          wrap_text: true
+        }
+      };
+
+      //XLSX.utils.book_append_sheet(wb, ws, "animals");
+      //XLSX.utils.table_to_book(wb, ws, "animals2");
       var tbl = document.getElementById("sheetjs");
-      var wb = XLSX.utils.table_to_book(tbl);
+      var wb = XLSX.utils.table_to_book(tbl); //table_tosheet
+      //Control cell width
+      wb["!cols"] = [
+        {
+          wpx: 120
+        },
+        {
+          wpx: 120
+        },
+        {
+          wpx: 120
+        },
+        {
+          wpx: 120
+        },
+        {
+          wpx: 120
+        },
+        {
+          wpx: 120
+        }
+      ];
       /* var wb = {
         SheetNames: ["Sheet", "JS"], // <-- include the sheet names in the array
         Sheets: {
@@ -612,8 +663,64 @@ export default {
         }
       }; */
       //var wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-      XLSX.writeFile(wb, "book.xlsx"); // name of the file is 'book.xlsx'
+      XLSX.writeFile(wb, "export.xlsx", {cellStyles:true});
+      //XLSX.writeFile(wb, "book.xlsx", { cellStyles: true } ); // name of the file is 'book.xlsx'
+    },
+    get_ProductReport() {
+      setTimeout(
+        () => (
+          (this.data_test = JSON.parse(localStorage.getItem("product_report"))),
+          (this.footer_test = JSON.parse(
+            localStorage.getItem("product_footer")
+          )) //, console.log(this.footer_test)
+        ),
+        2000
+      );
+    },
+    get_DelayReport() {
+      setTimeout(
+        () =>
+          (this.data_test2 = JSON.parse(localStorage.getItem("delay_report"))),
+        2000
+      );
+    },
+    get_LossReport() {
+      setTimeout(
+        () =>
+          (this.loss_data = JSON.parse(localStorage.getItem("loss_report"))),
+        2000
+      );
+    },
+    get_ProductData() {
+      setTimeout(
+        () => (
+          (this.product_data = JSON.parse(
+            localStorage.getItem("product_data")
+          )[0]),
+          console.log(this.product_data)
+        ),
+        3000
+      );
     }
+  },
+  computed: {
+    //แสดงข้อมูลตามวันที่ และ โรงรีด
+    data_Now() {
+      if (this.date != null || this.fact != null) {
+        this.get_ProductReport();
+        this.get_DelayReport();
+        this.get_LossReport();
+        this.get_ProductData();
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+  created() {
+    /* let current_doc = localStorage.getItem("current_doc");
+    current_doc = JSON.parse(current_doc);
+    console.log(current_doc) */
   }
 };
 </script>

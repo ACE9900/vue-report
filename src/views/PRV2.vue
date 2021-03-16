@@ -1,5 +1,5 @@
 <template>
-  <div class="pr_v2">
+  <div class="pr_v2" v-if="sendDate">
     <v-card class="grey lighten-3 ma-4">
       <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
         <v-toolbar-title
@@ -36,7 +36,7 @@
                   @input="menu2 = false"
                 ></v-date-picker> </v-menu></v-col></v-row></v-toolbar-title
         ><v-spacer></v-spacer
-        ><dataXLSX class="text-right" :fact="fact" :date="date" />
+        ><div v-if="createButton"><vueGrid class="ma-0 pa-0 mt-13 text-right" :fact="fact" :date="date" /></div>
       </v-toolbar>
       <v-row class="mb-2">
         <v-col cols="12" sm="8" class="pa-0">
@@ -82,9 +82,9 @@ import Consumption from "./Consumption";
 import LossReport from "./LossReport";
 import ProductionData from "./ProductionData";
 //import Test from "./Test";
-import dataXLSX from "./dataXLSX";
+//import dataNode from "./dataNode";
 //import dataCell from "./dataCell";
-//import dataPopulate from "./dataPopulate";
+import vueGrid from "./vueGrid";
 
 export default {
   name: "PRV2",
@@ -97,18 +97,48 @@ export default {
     ProductionData,
     //Test,
     //dataCell
-    dataXLSX
+    //dataXLSX
     //dataPopulate
     //dataNode
+    vueGrid
   },
   data() {
     return {
-      fact: "RMD7",
+      fact: "RMD8",
       factory: ["RMD7", "RMD8"],
       date: "",
       //date: new Date().toISOString().substr(0, 10),
       menu2: false
     };
+  },
+  computed: {
+    sendDate() {
+      if (
+        localStorage.getItem("date_data") != null ||
+        localStorage.getItem("date_data") != "" ||
+        localStorage.getItem("date_data") == null ||
+        localStorage.getItem("date_data") == ""
+      ) {
+        const data_date = {
+          fact: this.fact,
+          date: this.date
+        };
+        this.$store.commit("setDate", data_date);
+      }
+      return true;
+    },
+    createButton() {
+      if (
+        localStorage.getItem("date_data") != null ||
+        localStorage.getItem("date_data") != "" ||
+        localStorage.getItem("date_data") == null ||
+        localStorage.getItem("date_data") == ""
+      ) {
+        console.log("show");
+        //window.location.reload(1)
+      }
+      return true;
+    }
   },
   created() {
     //console.log(this.data_table1);

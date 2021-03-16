@@ -663,7 +663,7 @@ export default {
         }
       }; */
       //var wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-      XLSX.writeFile(wb, "export.xlsx", {cellStyles:true});
+      XLSX.writeFile(wb, "export.xlsx", { cellStyles: true });
       //XLSX.writeFile(wb, "book.xlsx", { cellStyles: true } ); // name of the file is 'book.xlsx'
     },
     get_ProductReport() {
@@ -696,9 +696,8 @@ export default {
         () => (
           (this.product_data = JSON.parse(
             localStorage.getItem("product_data")
-          )[0]),
-          console.log(this.product_data)
-        ),
+          )[0]) //, console.log(this.product_data)
+          ),
         3000
       );
     }

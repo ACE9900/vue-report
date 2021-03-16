@@ -319,7 +319,7 @@ export default {
       this.footerData = [
         {
           rowkey: 0,
-          _until: "รวมเวลา(นาที)",
+          _until: "เวลารวม(นาที)",
           _time: this.sum_time,
           _PP: this.sum_PP,
           _PD: this.sum_PD,
@@ -350,6 +350,39 @@ export default {
           //_o_Setup: this.percent_Setup.toFixed(2)
         }
       ];
+      this.pushFooter = [
+        {
+          _until: "เวลารวม(นาที)",
+          _time: this.sum_time,
+          _PP: this.sum_PP,
+          _PD: this.sum_PD,
+          _MM: this.sum_MM,
+          _EM: this.sum_EM,
+          _o_UTD: this.sum_UTD,
+          _o_QA: this.sum_QA,
+          _o_IT: this.sum_IT,
+          _o_WHD: this.sum_WHD,
+          _o_SMD: this.sum_SMD,
+          _o_Setup: this.sum_Setup,
+          _m_Rerods: this.sum_Rerods,
+          _m_Cobble: this.sum_Cobble
+        },
+        {
+          _until: "%",
+          _time: this.percent_time.toFixed(1),
+          _PP: this.percent_PP.toFixed(1),
+          _PD: this.percent_PD.toFixed(1),
+          _MM: this.percent_MM.toFixed(1),
+          _EM: this.percent_EM.toFixed(1),
+          _o_UTD: this.percent_UTD.toFixed(1),
+          _o_QA: this.percent_QA.toFixed(1),
+          _o_IT: this.percent_IT.toFixed(1),
+          _o_WHD: this.percent_WHD.toFixed(1),
+          _o_SMD: this.percent_SMD.toFixed(1)
+          //_o_Setup: this.percent_Setup.toFixed(2)
+        }
+      ];
+      setTimeout(() => this.$store.commit("setDF", this.pushFooter), 2000);
     },
     //เวลาปัจจุบัน YY/MM/DD
     getTime() {
@@ -441,17 +474,35 @@ export default {
     //รับค่า Data Delay
     getData() {
       this.getTime();
-      return axios
-        .get(this.url + "delay/" + this.date + "/" + this.fact)
-        .then(response => {
-          this.data_delay = response.data;
-          this.pushDataNull();
-          if (this.data_delay == null || this.data_delay == "") {
+      if (this.fact == "RMD7") {
+        //RMD7
+        return axios
+          .get(this.url + "delay/" + this.date + "/" + this.fact)
+          .then(response => {
+            this.data_delay = response.data;
+            //console.log(this.data_delay);
             this.pushDataNull();
-          } else {
-            this.pushData();
-          }
-        });
+            if (this.data_delay == null || this.data_delay == "") {
+              this.pushDataNull();
+            } else {
+              this.pushData();
+            }
+          });
+      } else {
+        //RMD8
+        return axios
+          .get(this.url + "delay8/" + this.date + "/" + this.fact)
+          .then(response => {
+            this.data_delay = response.data;
+            //console.log(this.data_delay);
+            this.pushDataNull();
+            if (this.data_delay == null || this.data_delay == "") {
+              this.pushDataNull();
+            } else {
+              this.pushData();
+            }
+          });
+      }
     },
     async pushData() {
       for (let i = 0; i < this.data_delay.length; i++) {

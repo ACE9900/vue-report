@@ -174,7 +174,7 @@
                       >
                       <v-col cols="4" class="pa-0">
                         <v-list-item-content class="align-end red--text">
-                          {{ item.down_time }}
+                          {{ item.billet_act }}
                         </v-list-item-content></v-col
                       >
                       <v-list-item-content></v-list-item-content>
@@ -231,15 +231,18 @@ export default {
     kgs_m: 0,
     count: 0,
     //Axios
-    url: "http://api.zen.zubbsteel.com/v1/"
+    url: "http://api.zen.zubbsteel.com/v1/",
+    data_bl_act: [],
   }),
   methods: {
     //รับค่า Grade ,Size ,Weight
     getData() {
+      this.getBLACT();
       return axios
         .get(this.url + "title/" + this.date + "/" + this.fact)
-        .then(response => {
+        .then((response) => {
           //console.log(response.data);
+          //console.log(this.data_bl_act);
           if (response.data == null || response.data == "") {
             this.pushDataNull();
           } else {
@@ -251,6 +254,18 @@ export default {
             } else {
               this.pushData();
             }
+          }
+        });
+    },
+    getBLACT() {
+      return axios
+        .get(this.url + "BL_Actual/" + this.date + "/" + this.fact)
+        .then(response => {
+          if (response.data == null || response.data == "") {
+            //this.pushDataNull();
+          } else {
+            this.data_bl_act = response.data;
+            //this.data_bl_act.push(); //push data
           }
         });
     },
@@ -269,12 +284,34 @@ export default {
           fg_cut: this.data_title[i].fg_mat + " (m)",
           //Weight
           billet_std: this.sum_billet + " (Kgs)",
-          billet_act: this.data_title[i].billet_mat + " (Kgs)",
+          billet_act: null,
           fg_std_1: this.kgs_m + " (Kgs/m)",
           fg_std_2: this.kgs_bundle + " (Kgs/bundle)"
         };
         this.setISNULL(i);
       }
+      //this.sum_billet_ac = 0;
+      for (let i = 0; i < this.data_bl_act.length; i++) {
+        this.formatBLACT(i);
+        //this.items[i].billet_act = this.sum_billet_ac + " (Kgs)";
+      }
+      this.items[0].billet_act = this.sum_billet_ac + " (Kgs)";
+      const title_data = {
+        rmd_date: this.data_title[0].rmd_date,
+        billet_grade: this.data_title[0].billet_grade,
+        billet_length: this.data_title[0].billet_mat,
+        fg_size: this.data_title[0].fg_size,
+        fg_grade: this.data_title[0].fg_grade,
+        fg_bundle: this.fg_bundle_commit,
+        fg_cut: this.data_title[0].fg_mat,
+        //Weight
+        billet_std: this.sum_billet,
+        billet_act: this.sum_billet_ac,
+        fg_std_1: this.kgs_m,
+        fg_std_2: this.kgs_bundle
+      };
+      setTimeout(() => this.$store.commit("setTitle", title_data), 3000);
+      //console.log(title_data);
       this.items.push(); //push data
     },
     //Push Data Null
@@ -332,6 +369,15 @@ export default {
         ).toFixed(2);
       }
     },
+    formatBLACT(i) {
+      if (this.sum_billet_ac == "" || this.sum_billet_ac == null) {
+        this.sum_billet_ac = this.data_bl_act[i].billet_weight; //+ " (Kgs)";
+      } else {
+        this.sum_billet_ac =
+          this.sum_billet_ac + this.data_bl_act[i].billet_weight;
+        //console.log(this.sum_billet_ac + this.data_bl_act[i].billet_weight);
+      }
+    },
     setISNULL(i) {
       if (
         this.data_title[i].billet_mat == null ||
@@ -339,13 +385,24 @@ export default {
       )
         this.items[i].billet_length = "-";
       if (
-        this.data_title[i].bundle_size == null ||
-        this.data_title[i].bundle_size == ""
-      )
-        this.items[i].fg_bundle = "-";
+        this.data_title[i].billet_qty == null ||
+        this.data_title[i].billet_qty == "" ||
+        this.data_title[i].fg_bundle == null ||
+        this.data_title[i].fg_bundle == ""
+      ) {
+        this.items[i].fg_bundle = 0;
+      } else {
+        this.items[i].fg_bundle =
+          (
+            this.data_title[i].billet_qty / this.data_title[i].fg_bundle
+          ).toFixed(2) + " (bar/bundle)";
+        this.fg_bundle_commit = (
+          this.data_title[i].billet_qty / this.data_title[i].fg_bundle
+        ).toFixed(2);
+      }
       if (this.data_title[i].fg_mat == null || this.data_title[i].fg_mat == "")
         this.items[i].fg_cut = "-";
-    }
+    },
   },
   computed: {
     //แสดงข้อมูลตามวันที่ และ โรงรีด
@@ -356,10 +413,10 @@ export default {
       } else {
         return false;
       }
-    }
+    },
   },
   created() {
     //this.getData();
-  }
+  },
 };
 </script>

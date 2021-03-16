@@ -261,8 +261,8 @@ export default {
             ).toFixed(1)),
           2000
         );
-      //console.log(this.items);
-      this.$store.commit("setPD", this.items);
+      //console.log(this.items[0]);
+      setTimeout(() => this.$store.commit("setPD", this.items[0]), 2000);
     }
   },
   computed: {

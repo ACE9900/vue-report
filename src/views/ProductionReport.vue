@@ -505,8 +505,8 @@ export default {
           _p_size: this.sum_q_pcs, //Pcs
           _p_grade: null, //STD Wgt
           _q_bundle: this.sum_q_act, //Actual Wgt
-          _q_pcs: this.sum_m_return_piece.toFixed(2), //Return Piece
-          _q_std: this.sum_m_return_kg, //Return Kg
+          _q_pcs: null, //this.sum_m_return_piece.toFixed(2), //Return Piece
+          _q_std: null, //this.sum_m_return_kg, //Return Kg
           _q_act: this.sum_m_cobble_piece, //Cobble Piece
           _m_return_piece: this.sum_m_cobble_kg, //Cobble Kg
           _m_return_kg: (this.sum_m_total / this.data_table1.length).toFixed(2), //Total
@@ -539,8 +539,8 @@ export default {
           q_pcs: this.sum_q_pcs, //Pcs
           q_std: null, //STD Wgt
           q_act: this.sum_q_act, //Actual Wgt
-          m_return_piece: this.sum_m_return_piece.toFixed(2), //Return Piece
-          m_return_kg: this.sum_m_return_kg, //Return Kg
+          m_return_piece: null, //this.sum_m_return_piece.toFixed(2), //Return Piece
+          m_return_kg: " ", //this.sum_m_return_kg, //Return Kg
           m_cobble_piece: this.sum_m_cobble_piece, //Cobble Piece
           m_cobble_kg: this.sum_m_cobble_kg, //Cobble Kg
           m_total: (this.sum_m_total / this.data_table1.length).toFixed(2), //Total
@@ -667,6 +667,8 @@ export default {
         if (this.data_bpq[i].fg_stdweight == null)
           this.data_bpq[i].fg_stdweight = 0;
         if (this.data_bpq[i].fg_weight == null) this.data_bpq[i].fg_weight = 0;
+        if (this.data_bpq[i].billet_grade == null)
+          this.data_bpq[i].billet_grade = " ";
 
         //Push Data
         this.data_table1[i] = {
@@ -684,11 +686,11 @@ export default {
           //Quantity
           _q_bundle: this.data_bpq[i].fg_bundle,
           _q_pcs: parseFloat(this.data_bpq[i].fg_qty),
-          _q_std: this.data_bpq[i].fg_stdweight,
+          _q_std: (this.data_bpq[i].fg_stdweight).toFixed(2),
           _q_act: this.data_bpq[i].fg_weight,
           //Miss roll Total
-          _m_return_piece: null,
-          _m_return_kg: null,
+          _m_return_piece: " ",
+          _m_return_kg: " ",
           _m_cobble_piece: null,
           _m_cobble_kg: null,
           _m_total: null,
@@ -731,6 +733,8 @@ export default {
         if (this.data_bpq[i].fg_stdweight == null)
           this.data_bpq[i].fg_stdweight = 0;
         if (this.data_bpq[i].fg_weight == null) this.data_bpq[i].fg_weight = 0;
+        if (this.data_bpq[i].billet_grade == null)
+          this.data_bpq[i].billet_grade = " ";
 
         if (this.data_miss[i].rmd_defect == null) {
           this.data_miss[i].rmd_defect = 0;
@@ -755,11 +759,11 @@ export default {
           //Quantity
           _q_bundle: this.data_bpq[i].fg_bundle,
           _q_pcs: parseFloat(this.data_bpq[i].fg_qty),
-          _q_std: this.data_bpq[i].fg_stdweight,
+          _q_std: (this.data_bpq[i].fg_stdweight).toFixed(2),
           _q_act: this.data_bpq[i].fg_weight,
           //Miss roll Total
-          _m_return_piece: null,
-          _m_return_kg: null,
+          _m_return_piece: " ",
+          _m_return_kg: " ",
           _m_cobble_piece: this.data_miss[i].rmd_defect,
           _m_cobble_kg: parseFloat(this.data_miss[i].rmd_weightbillet),
           _m_total:
